@@ -21,13 +21,13 @@ $url = "$($env:SYSTEM_TEAMFOUNDATIONCOLLECTIONURI)$env:SYSTEM_TEAMPROJECTID/_api
            
 Write-Host "Latest get URL end point: $url"
 
-$commitId ='none'
+$branchCommitId ='none'
 try{
 
     $response = Invoke-RestMethod -Uri $url -Headers @{Authorization = "Bearer $env:SYSTEM_ACCESSTOKEN"}
     Write-Host "StatusCode:"$response.StatusCode   
     # id of the las commit
-    $commitId = $response.sourceVersion
+    $branchCommitId = $response.sourceVersion
 
 }catch{
     Write-Host "Error.. StatusCode:" $_.Exception.Response.StatusCode
@@ -36,9 +36,11 @@ try{
 }
 
 # Get the (git diff) between the build and the repository
-Write-Host "Head commit: " git show head --name-only
-Write-Host "Branch $branch latest success commit: $response.sourceVersion"
-$editedFiles = git diff HEAD "$commitId" --name-only
+$gitHeadCommit = git show head --name-only
+Write-Host "Head commit: $gitHeadCommit"
+Write-Host "Branch $branch latest success commit: $branchCommitId"
+
+$editedFiles = git diff HEAD "$branchCommitId" --name-only
 
 $rootFolders = @()
 $editedFiles | ForEach-Object { 

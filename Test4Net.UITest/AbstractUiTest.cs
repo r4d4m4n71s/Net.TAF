@@ -34,7 +34,6 @@ public abstract class AbstractUiTest : AbstractTest
     public T GetPage<T>() where T : AbstractPage
     {
         var browser = new BrowserAdapter(DriverFactory.Get<ChromeDriver>("Chrome"));
-
         //var pagePlatformAttributes = typeof(T).GetCustomAttributes(typeof(PlatformAttribute), true);
 
         var page = PageFactory.GetPage<T>(browser);
