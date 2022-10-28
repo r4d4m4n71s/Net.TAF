@@ -25,7 +25,7 @@ $branchCommitId ='none'
 try{
 
     $response = Invoke-RestMethod -Uri $url -Headers @{Authorization = "Bearer $env:SYSTEM_ACCESSTOKEN"}
-    Write-Host "StatusCode:"$response.StatusCode   
+    Write-Host "StatusCode: $response.StatusCode"   
     # id of the las commit
     $branchCommitId = $response.sourceVersion
 
@@ -36,7 +36,7 @@ try{
 }
 
 # Get the (git diff) between the build and the repository
-$gitHeadCommit = git show head --name-only
+$gitHeadCommit = git rev-parse HEAD
 Write-Host "Head commit: $gitHeadCommit"
 Write-Host "Branch $branch latest success commit: $branchCommitId"
 

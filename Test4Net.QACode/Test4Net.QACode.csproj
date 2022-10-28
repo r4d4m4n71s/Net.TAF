@@ -50,22 +50,7 @@
 			<PackagePath>\</PackagePath>
 			<Pack>True</Pack>
 		</None>
-		<None Update="TestData\Drivers\BrowserStackSettingsExtructure.json">
-		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-		</None>
-		<None Update="TestData\Drivers\ChromeSettingsExtructure.json">
-		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-		</None>
-		<None Update="TestData\Drivers\EdgeSettingsExtructure.json">
-		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-		</None>
-		<None Update="TestData\Drivers\FirefoxSettingsExtructure.json">
-		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-		</None>
 		<None Update="TestData\Drivers\GeneralSettingsExtructure.json">
-		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-		</None>
-		<None Update="TestData\Drivers\SafariSettingsExtructure.json">
 		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</None>
 	</ItemGroup>
