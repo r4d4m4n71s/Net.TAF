@@ -5,12 +5,18 @@
 
 [CmdletBinding()]
 param (
+    # Build [id or name] who's pushing changes to the repo, target branch to look up
     [Parameter(Mandatory=$true,Position=1)][alias("definition-lookup")][string]$buidDefinitionLookUp,
     [Parameter(Mandatory=$true,Position=2)][alias("branch-name")][string]$branch,  
+    
+    # Folder to look up assemblies
     [Parameter(Mandatory=$true,Position=3)][alias("folder-lookup")][string]$folderLookup="./",
+    
+    # Included and excluded search criteria
     [Parameter(Mandatory=$false,Position=4)][alias("projectLike-wildcard")][string]$projectLikeWildcard="*",
     [Parameter(Mandatory=$false,Position=5)][alias("projectNotLike-wildcard")][string]$projectNotLikeWildcard="")
 
+# Query info of the latest build exec
 $url = "$($env:SYSTEM_TEAMFOUNDATIONCOLLECTIONURI)$env:SYSTEM_TEAMPROJECTID/_apis/build/latest/${buidDefinitionLookUp}?branchName=${branch}"
            
 Write-Host "Latest get URL end point: $url"
@@ -21,6 +27,7 @@ try{
     $response = Invoke-RestMethod -Uri $url -Headers @{Authorization = "Bearer $env:SYSTEM_ACCESSTOKEN"}
     Write-Host "StatusCode:"$response.StatusCode.value__   
     Write-Host "Last build source version: "$response.sourceVersion
+    # id of the las commit
     $commitId = $response.sourceVersion
 
 }catch{
@@ -29,12 +36,12 @@ try{
     throw $_.Exception
 }
 
-# Get the (git diff) since last build
-$editedFiles = git diff HEAD "$commitId~" --name-only
+# Get the (git diff) between the build and the repository
+$editedFiles = git diff HEAD "$commitId" --name-only
 
 $rootFolders = @()
 $editedFiles | ForEach-Object { 
-    # look up root folder
+    # look up root folder into
     $sepIndex = $_.IndexOf('/')
     if($sepIndex -gt 0) {
         $rootFolders += $_.substring(0, $sepIndex)
@@ -43,19 +50,20 @@ $editedFiles | ForEach-Object {
 $rootFolders = $rootFolders | select -Unique
 Write-Host "Edited folders: "$rootFolders
 
-# match expected folders vs found
-#Set-Location $folderLookup
+# match folder diferences between [repo] and [build latest commit]
 $matches = Get-ChildItem $folderLookup |
 	Where-Object { 
         $_.PsIsContainer -and 
         $_.Name -like $projectLikeWildcard -and 
         $_.Name -notlike $projectNotLikeWildcard -and 
         $rootFolders.Contains($_.Name) }
-    
+
 if($matches -ne $null){
     $matches = [system.String]::Join(",", $matches)
 }
 
 Write-Host "Matches: "$matches
+
+# set matched folder to global variable    
 Write-Host "##vso[task.setvariable variable=SourceCodeUpdated]"$matches
 Write-Host $env:ProjectsUpdated
