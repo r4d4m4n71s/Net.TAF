@@ -21,18 +21,17 @@ $url = "$($env:SYSTEM_TEAMFOUNDATIONCOLLECTIONURI)$env:SYSTEM_TEAMPROJECTID/_api
            
 Write-Host "Latest get URL end point: $url"
 
-$branchCommitId ='none'
+$branchCommitId = 'none'
 try{
 
     $response = Invoke-RestMethod -Uri $url -Headers @{Authorization = "Bearer $env:SYSTEM_ACCESSTOKEN"}
-    Write-Host "StatusCode: $response.StatusCode"   
+    Write-Host "StatusCode: $response.result"   
     # id of the las commit
     $branchCommitId = $response.sourceVersion
 
 }catch{
-    Write-Host "Error.. StatusCode:" $_.Exception.Response.StatusCode
-    Write-Host "Error.. StatusDescription:" $_.Exception.Response.StatusDescription
-    throw $_.Exception
+    Write-Host "Error.. StatusCode:" $_.Exception.Response.status
+    hrow $_.Exception
 }
 
 # Get the (git diff) between the build and the repository
@@ -54,12 +53,12 @@ $rootFolders = $rootFolders | select -Unique
 Write-Host "Updated folders: "$rootFolders
 
 # match folder diferences between [repo] and [build latest commit]
-$matches = Get-ChildItem $folderLookup |
+$matches = Get-ChildItem $folderLookup -Recurse |
 	Where-Object { 
         $_.PsIsContainer -and 
         $_.Name -like $projectLikeWildcard -and 
         $_.Name -notlike $projectNotLikeWildcard -and 
-        $rootFolders.Contains($_.Name) }
+        $rootFolders -ne $null -and $rootFolders.Contains($_.Name) }
 
 if($matches -ne $null){
     $matches = [system.String]::Join(",", $matches)
