@@ -1,0 +1,75 @@
+{
+  "Chrome": {
+    "type": "Chrome",
+    "Viewport": "1920x1080",
+    "driverPath": ""
+  },
+  "Edge": {
+    "type": "Edge",
+    "driverPath": ""
+  },
+  "FireFox": {
+    "type": "Firefox",
+    "driverPath": ""
+  },
+  "Safari": {
+    "type": "Safari",
+    "driverPath": ""
+  },
+  "BSWin11Chrome": {
+    "type": "BrowserStackChrome",
+    "Proxy": "",
+    "bstack:options": {
+      "os": "Windows",
+      "osVersion": "11",
+      "resolution": "1280x1024"
+    }
+  },
+  "BSWin11Edge": {
+    "type": "BrowserStackEdge",
+    "Proxy": "",
+    "bstack:options": {
+      "os": "Windows",
+      "osVersion": "11",
+      "browserName": "xxxxx"
+    }
+  },
+  "FakeXX": {
+    "type": "BrowserStackEdge",
+    "Options": {
+      "FakeOpton": 123
+    },
+    "bstack:options": {
+      "browserName": "Edge browser",
+      "os": "Windows",
+      "osVersion": "11"
+    }
+  },
+  "commons": {
+    "Arguments": [
+      "--start-maximized",
+      "--incognito",
+      //"--headless",
+      "--disable-extensions",
+      "--ignore-certificate-errors",
+      "--disable-popup-blocking"
+    ],
+    "bstack:options": {
+      "local": false,
+      "seleniumVersion": "4.4.0",
+      "userName": "johnfranco_xcUFk8",
+      "accessKey": "cc6mavEwvsW16mFEPNze",
+      "resolution": "1920x1080"
+    },
+    "Proxy": {
+      "IsAutoDetect": false,
+      "HttpProxy": "127.0.0.1:8888"
+    },
+    "ServiceUrl": "https://hub.browserstack.com/wd/hub/",
+    "Timeouts": {
+      "ImplicitWait": 1000,
+      "AsynchronousJavaScript": 120000,
+      "PageLoad": 120000
+    }
+  }
+}

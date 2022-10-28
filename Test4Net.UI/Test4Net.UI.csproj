@@ -1,0 +1,38 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>net6.0</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>disable</Nullable>
+		<Description>Selenium web driver adapter.</Description>
+		<RepositoryUrl>https://github.com/r4d4m4n71s/Test4Net/Test4Net.UI</RepositoryUrl>
+		<PackageTags>NetCore Library Test Automation Framework POM Test4Net BrowserTesting Chrome Edge Firefox Safari</PackageTags>
+		<Title>Test Automation Framework UI</Title>
+		<PackageReadmeFile>README.md</PackageReadmeFile>
+		<Authors>John Edwin Franco</Authors>
+		<Product>Test4Net</Product>
+		<PackageProjectUrl>https://github.com/r4d4m4n71s/Test4Net/packages</PackageProjectUrl>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="DotNetSeleniumExtras.PageObjects.Core" Version="4.3.0" />
+		<PackageReference Include="Selenium.WebDriver" Version="4.5.1" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<Folder Include="Attributes\" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\Test4Net.Logging\Test4Net.Logging.csproj" />
+	  <ProjectReference Include="..\Test4Net.Util\Test4Net.Util.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <None Update="README.md">
+	    <PackagePath>\</PackagePath>
+	    <Pack>True</Pack>
+	  </None>
+	</ItemGroup>
+
+</Project>

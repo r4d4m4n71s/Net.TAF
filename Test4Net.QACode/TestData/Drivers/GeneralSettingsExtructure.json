@@ -1,0 +1,77 @@
+﻿{
+  "chrome_1": {
+    "type": "Chrome"
+  },
+  "edge_2": {
+    "type": "Edge"
+  },
+  "firefox_3": {
+    "type": "Firefox",
+    "prefs": [ "preference", "123" ]
+  },
+  "safari_4": {
+    "type": "Safari",
+    "safari:automaticInspection": true,
+    "safari:automaticProfiling": true
+  },
+  "bsWin11Chrome": {
+    "type": "BrowserStackChrome",
+    "bstack:options": {
+      "os": "Windows",
+      "osVersion": "11",
+      "resolution": "1280x1024"
+    }
+  },
+  "commons": {
+    "args": [ "--arg1", "--arg2", "--arg3" ],
+    "binary": "c:/someLocation/driver.exe",
+    //"extensions": [ "ext1", "ext2", "ext3" ],
+    "detach": true,
+    "debuggerAddress": "some ip add",
+    "minidumpPath": "_minidumpPath",
+    "mobileEmulation": "Device name",
+    "perfLoggingPrefs": {
+      "isCollectingNetworkEvents": true,
+      "isCollectingPageEvents": true,
+      "bufferUsageReportingInterval": "5000"
+    },
+    "prefs": [
+      "preference",
+      { "123": 123 }
+    ],
+    "windowTypes": [
+      "winT1"
+    ],
+    "androidOptions": {
+      "androidPackage": "any package",
+      "UseRunningApp": true,
+      "AndroidProcess": "any"
+    },
+
+    "xxxxx": "xxxxx",
+
+    "acceptInsecureCertificates": true,
+    "browserVersion": "browser version",
+    "pageLoadStrategy": "eager",
+    "platformName": "Windows",
+    "strictFileInteractability": true,
+    "webSocketUrl": true,
+    "unhandledPromptBehavior": "accept",
+
+    "proxy": {
+      "proxyType": "manual",
+      "httpProxy": "127.0.0.1:8888"
+    },
+
+    "serviceUrl": "https://hub.browserstack.com/wd/hub/",
+
+    // post construction features ...
+    "viewport": "1920x1080",
+
+    "timeouts": {
+      "ImplicitWait": 1000,
+      "AsynchronousJavaScript": 120000,
+      "PageLoad": 120000
+    }
+  }
+}

@@ -1,0 +1,13 @@
+﻿{
+  "browserName": "safari",
+  "browserVersion": "browser version",
+  "platformName": "Windows",
+  "acceptInsecureCerts": true,
+  "webSocketUrl": true,
+  "strictFileInteractability": true,
+  "pageLoadStrategy": "eager",
+  "unhandledPromptBehavior": "accept",
+  "xxxxx": "xxxxx",
+  "safari:automaticInspection": true,
+  "safari:automaticProfiling": true
+}

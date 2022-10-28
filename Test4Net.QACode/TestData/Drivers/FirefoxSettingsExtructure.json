@@ -1,0 +1,21 @@
+﻿{
+  "browserName": "firefox",
+  "browserVersion": "browser version",
+  "platformName": "Windows",
+  "acceptInsecureCerts": true,
+  "webSocketUrl": true,
+  "strictFileInteractability": true,
+  "pageLoadStrategy": "eager",
+  "unhandledPromptBehavior": "accept",
+  "xxxxx": "xxxxx",
+  "moz:firefoxOptions": {
+    "binary": "c:/someLocation/driver.exe",
+    "args": [
+      "--arg1",
+      "--arg2",
+      "--arg3"
+    ],
+    "androidPackage": "AndroidPackage",
+    "androidActivity": "activity"
+  }
+}

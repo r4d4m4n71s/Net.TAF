@@ -1,0 +1,35 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>net6.0</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>disable</Nullable>
+		<Description>Base model for UI Testing.</Description>
+		<RepositoryUrl>https://github.com/r4d4m4n71s/Test4Net/Test4Net.UITest</RepositoryUrl>
+		<PackageTags>NetCore UITestModel Library Test Automation Framework Test4Net Chrome Edge Firefox Safari</PackageTags>
+		<Title>Test Automation Framework UI Test</Title>
+		<PackageReadmeFile>README.md</PackageReadmeFile>
+		<Authors>John Edwin Franco</Authors>
+		<Product>Test4Net</Product>
+		<PackageProjectUrl>https://github.com/r4d4m4n71s/Test4Net/packages</PackageProjectUrl>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<Compile Remove="Browser\**" />
+		<EmbeddedResource Remove="Browser\**" />
+		<None Remove="Browser\**" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\Test4Net.Test\Test4Net.Test.csproj" />
+		<ProjectReference Include="..\Test4Net.UI\Test4Net.UI.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<None Update="README.md">
+			<PackagePath>\</PackagePath>
+			<Pack>True</Pack>
+		</None>
+	</ItemGroup>
+
+</Project>

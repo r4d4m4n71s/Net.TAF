@@ -1,0 +1,26 @@
+﻿using FluentAssertions;
+using Microsoft.Extensions.Logging;
+using Test4Net.Logging.Provider;
+
+namespace Test4Net.QACode.MSTest;
+
+[TestClass]
+public class MsTestAdapterTest : BaseTest
+{
+    /// <inheritdoc />
+    public MsTestAdapterTest()
+    {
+           
+    }
+
+    [TestMethod]
+    public void LoggerOverriding_Log4Net_Ok()
+    {
+        // Log 4 net approach example
+        ConfigureLogger(builder =>
+            builder.Decorate(Configuration.GetSection("Logging"))
+                .AddLog4Net(Path.Combine(Configuration["ConfigurationPath"], "log4net.config")));
+        
+        new Action(() => Log.Info("xxx")).Should().NotThrow();
+    }
+}
