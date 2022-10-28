@@ -25,18 +25,19 @@ $commitId ='none'
 try{
 
     $response = Invoke-RestMethod -Uri $url -Headers @{Authorization = "Bearer $env:SYSTEM_ACCESSTOKEN"}
-    Write-Host "StatusCode:"$response.StatusCode.value__   
-    Write-Host "Last build source version: "$response.sourceVersion
+    Write-Host "StatusCode:"$response.StatusCode   
     # id of the las commit
     $commitId = $response.sourceVersion
 
 }catch{
-    Write-Host "Error.. StatusCode:" $_.Exception.Response.StatusCode.value__ 
+    Write-Host "Error.. StatusCode:" $_.Exception.Response.StatusCode
     Write-Host "Error.. StatusDescription:" $_.Exception.Response.StatusDescription
     throw $_.Exception
 }
 
 # Get the (git diff) between the build and the repository
+Write-Host "Head commit: " git show head --name-only
+Write-Host "Branch $branch latest success commit: $response.sourceVersion"
 $editedFiles = git diff HEAD "$commitId" --name-only
 
 $rootFolders = @()
@@ -48,7 +49,7 @@ $editedFiles | ForEach-Object {
     }
 }
 $rootFolders = $rootFolders | select -Unique
-Write-Host "Edited folders: "$rootFolders
+Write-Host "Updated folders: "$rootFolders
 
 # match folder diferences between [repo] and [build latest commit]
 $matches = Get-ChildItem $folderLookup |
@@ -62,7 +63,7 @@ if($matches -ne $null){
     $matches = [system.String]::Join(",", $matches)
 }
 
-Write-Host "Matches: "$matches
+Write-Host "Matches with look up query: "$matches
 
 # set matched folder to global variable    
 Write-Host "##vso[task.setvariable variable=SourceCodeUpdated]"$matches
