@@ -22,6 +22,7 @@
 
 	<ItemGroup>
 		<ProjectReference Include="..\Test4Net.Logging\Test4Net.Logging.csproj" />
+		<ProjectReference Include="..\Test4Net.Util\Test4Net.Util.csproj" />
 	</ItemGroup>
 
 	<ItemGroup>

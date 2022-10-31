@@ -1,0 +1,24 @@
+[
+  "BSWin11Chrome",
+  "Chrome",
+  "AndroidGalaxyS20",
+  "IosIPhone12Pro"
+]/*
+  {
+    "Windows11Chrome": {
+      "Os": "Windows11",
+      "Browser": "Chrome",
+      "ViewPort": "3840x2160"
+    },
+    "IosIPhone12Pro": {
+      "Os": "iOs",
+      "browser": "Safari",
+      "ViewPort": "390x844"
+    },
+    "AndroidGalaxyS20": {
+      "Os": "Android",
+      "browser": "Samsung",
+      "ViewPort": "412x915"
+    }
+  }
+]*/

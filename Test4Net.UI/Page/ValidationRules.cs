@@ -41,6 +41,17 @@ public class ValidationRules : Dictionary<string, Rule>
     /// Add page validation rule
     /// <see cref="Rule"/>
     /// </summary>
+    /// <param name="rules">list of rules</param>
+    /// <returns>this as fluent</returns>
+    public ValidationRules Add(List<Rule> rules){
+        rules.ForEach(rule => Add(rule));
+        return this;
+    }
+
+    /// <summary>
+    /// Add page validation rule
+    /// <see cref="Rule"/>
+    /// </summary>
     /// <param name="id">Unique id</param>
     /// <param name="rule">Rule</param>
     public new void Add(string id, Rule rule)
@@ -70,8 +81,8 @@ public class ValidationRules : Dictionary<string, Rule>
             {
                 _log.Warn($"Rule [{rule.Id}] is not valid.");
 
-                if (string.IsNullOrEmpty(rule.Details))
-                    _log.Info($"...{rule.Details}");
+                if (string.IsNullOrEmpty(rule.Definition))
+                    _log.Info($"Rule definition: {rule.Definition}");
 
                 faults.Add(rule);
             }
@@ -84,33 +95,40 @@ public class ValidationRules : Dictionary<string, Rule>
 /// <summary>
 /// Rule model
 /// </summary>
-public struct Rule
+public class Rule
 {
     /// <summary>
     /// Constructor
     /// </summary>
     /// <param name="id">Unique id</param>
+    /// <param name="owner">Object owner of the rule</param>
     /// <param name="validate">Perform a validation action</param>
-    /// <param name="details"></param>
-    public Rule(string id, Func<bool> validate, string details = "")
+    /// <param name="definition"></param>
+    public Rule(string id, Type owner, Func<bool> validate, string definition = "")
     {
         Id = id;
+        Owner = owner;
         IsValid = validate();
-        Details = details;
+        Definition = definition;
     }
-
+    
     /// <summary>
     /// Rule name
     /// </summary>
     public string Id { get; init; }
 
     /// <summary>
+    /// Owner of this rule
+    /// </summary>
+    public Type Owner { get; init; }
+    
+    /// <summary>
     /// Validation result
     /// </summary>
     public bool IsValid { get; init; }
 
     /// <summary>
-    /// Developer details or description about the rule
+    /// Developer details the rule definition
     /// </summary>
-    public string Details { get; }
+    public string Definition { get; }
 }

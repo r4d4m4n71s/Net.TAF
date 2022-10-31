@@ -10,8 +10,8 @@ public class BrowserStackBuilder<T> : AbstractBuilder<T> where T : DriverOptions
     /// <inheritdoc/>
     public BrowserStackBuilder(IDictionary<string, object> optionsAsDic) : base(optionsAsDic)
     {
-        if(!OptionsAsDicAsDic.ContainsKey("serviceUrl"))
-            OptionsAsDicAsDic.Add("serviceUrl", _browserStackServiceUrl);
+        if(!OptionsAsDic.ContainsKey("serviceUrl"))
+            OptionsAsDic.Add("serviceUrl", _browserStackServiceUrl);
 
         SetBrowserStackOptions();
     }
@@ -23,8 +23,8 @@ public class BrowserStackBuilder<T> : AbstractBuilder<T> where T : DriverOptions
     /// <inheritdoc/>
     public BrowserStackBuilder(IDictionary<string, object> optionsAsDic, DriverOptions options) : base(optionsAsDic, options) 
     {
-        if (!OptionsAsDicAsDic.ContainsKey("serviceUrl"))
-            OptionsAsDicAsDic.Add("serviceUrl", _browserStackServiceUrl);
+        if (!OptionsAsDic.ContainsKey("serviceUrl"))
+            OptionsAsDic.Add("serviceUrl", _browserStackServiceUrl);
 
         SetBrowserStackOptions();
     }
@@ -34,7 +34,7 @@ public class BrowserStackBuilder<T> : AbstractBuilder<T> where T : DriverOptions
     /// </summary>
     private void SetBrowserStackOptions(string optionsKey = "bstack:options")
     {
-        if (!OptionsAsDicAsDic.ContainsKey(optionsKey))
+        if (!OptionsAsDic.ContainsKey(optionsKey))
             throw new ArgumentException($"{optionsKey} is required");
         /*
         var options = OptionsAsDicAsDic[optionsKey].JsonToDic();

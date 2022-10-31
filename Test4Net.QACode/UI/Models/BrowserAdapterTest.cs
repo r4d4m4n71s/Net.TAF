@@ -4,7 +4,5 @@
 
 public class BrowserAdapterTest : BaseUiTest
 {
-    /// <inheritdoc />
-    //protected override ILog GetLogger() => GetLogger<BrowserAdapterTest>();
-
+    
 }

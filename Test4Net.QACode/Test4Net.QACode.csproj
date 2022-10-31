@@ -59,4 +59,5 @@
 	  <AdditionalDesignTimeBuildInput Remove="FakesAssemblies\**" />
 	</ItemGroup>
 	
+	
 </Project>

@@ -9,6 +9,9 @@ namespace Test4Net.UI.Browser;
 /// </summary>
 public sealed class BrowserAdapter : IBrowser
 {
+    /// <inheritdoc/>
+    public string ConfigurationId { get; }
+
     /// <summary>
     /// T Driver
     /// </summary>
@@ -16,10 +19,12 @@ public sealed class BrowserAdapter : IBrowser
 
     /// <inheritdoc/>
     public IJavaScript JavaScript { get; }
-
-    public BrowserAdapter(IWebDriver driver)
+    
+    public BrowserAdapter(string configurationId, IWebDriver driver)
     {
+        ConfigurationId = configurationId;
         Driver = driver;
+        ConfigurationId = configurationId;
         JavaScript = new JavaScriptAdapter(this);
     }
 }

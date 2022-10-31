@@ -27,7 +27,7 @@ public abstract class AbstractBuilder<T> : IOptionsBuilder<T> where T : DriverOp
     /// <summary>
     /// Options as dictionary
     /// </summary>
-    protected IDictionary<string, object> OptionsAsDicAsDic { get; }
+    protected IDictionary<string, object> OptionsAsDic { get; }
 
     #endregion
 
@@ -36,7 +36,7 @@ public abstract class AbstractBuilder<T> : IOptionsBuilder<T> where T : DriverOp
     /// Creates options model from dictionary
     /// </summary>
     /// <param name="optionsAsDic"></param>
-    protected AbstractBuilder(IDictionary<string, object> optionsAsDic) => OptionsAsDicAsDic = optionsAsDic;
+    protected AbstractBuilder(IDictionary<string, object> optionsAsDic) => OptionsAsDic = optionsAsDic;
 
     /// <summary>
     /// Creates options model from driver options
@@ -45,7 +45,7 @@ public abstract class AbstractBuilder<T> : IOptionsBuilder<T> where T : DriverOp
     protected AbstractBuilder(DriverOptions options)
     {
         Options = (T)options;
-        OptionsAsDicAsDic = new Dictionary<string, object>();
+        OptionsAsDic = new Dictionary<string, object>();
     }
 
     /// <summary>
@@ -57,7 +57,7 @@ public abstract class AbstractBuilder<T> : IOptionsBuilder<T> where T : DriverOp
     protected AbstractBuilder(IDictionary<string, object> optionsAsDic, DriverOptions options)
     {
         _extraOptions = (T)options;
-        OptionsAsDicAsDic = optionsAsDic;
+        OptionsAsDic = optionsAsDic;
     }
     #endregion
 
@@ -66,8 +66,8 @@ public abstract class AbstractBuilder<T> : IOptionsBuilder<T> where T : DriverOp
     /// <inheritdoc cref="IOptionsBuilder{T}.Build"/>
     public IOptionsBuilder<T> Build()
     {
-        if(OptionsAsDicAsDic.Any())
-            Options = (_extraOptions ?? new T()).BuildFromDictionary(OptionsAsDicAsDic);
+        if(OptionsAsDic.Any())
+            Options = (_extraOptions ?? new T()).BuildFromDictionary(OptionsAsDic);
         return this;
     }
     

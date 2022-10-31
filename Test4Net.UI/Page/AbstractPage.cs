@@ -15,13 +15,13 @@ public abstract class AbstractPage : PageAdapter
     public ValidationRules Rules { get; set; }
 
     /// <summary>
-    /// Page logger
+    /// Constructor
     /// </summary>
-    protected ILog Log { get; set; }
-
+    /// <param name="browser">Browser instance</param>
+    /// <param name="log">Related logger</param>
+    /// <param name="parent">Parent page</param>
     protected AbstractPage(IBrowser browser, ILog log, IPage parent = default) : base(browser, parent)
     {
-        Log = log;
         Rules = new ValidationRules(log);
 
         // Init html controls

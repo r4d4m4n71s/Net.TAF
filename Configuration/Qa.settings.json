@@ -1,5 +1,11 @@
 {
   "BaseUrl": "",
+  "BrowserProfiles": [
+    "BSWin11Chrome",
+    "Chrome",
+    "AndroidGalaxyS20",
+    "IosIPhone12Pro"
+  ],
   "Logging": {
     "LogLevel": { // All providers, LogLevel applies to all the enabled providers.
       "Default": "Information" // Default logging, Error and higher.     

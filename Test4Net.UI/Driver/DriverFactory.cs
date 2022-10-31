@@ -8,7 +8,7 @@ namespace Test4Net.UI.Driver;
 /// <summary>
 /// Selenium web driver factory
 /// </summary>
-public class DriverFactory
+public class DriverFactory : IDriverFactory
 {
     /// <summary>
     /// Driver setups
@@ -41,8 +41,8 @@ public class DriverFactory
     /// </summary>
     /// <param name="setupId"></param>
     /// <param name="setup"></param>
-    public DriverFactory(string setupId, IDriverSetup setup) : this() => 
-        _setups.Add(setupId, setup);
+    public DriverFactory(string setupId, IDriverSetup setup) : this() =>
+        AddSetup(setupId, setup);
 
     /// <summary>
     /// Get driver instance mapping driver from configuration
@@ -52,7 +52,7 @@ public class DriverFactory
     /// <param name="driverSetupAsDic">Driver options set as json dic</param>
     /// <returns>Driver instance</returns>
     public DriverFactory(IDictionary<string, object> driverSetupAsDic) : this() =>
-        _setups.Add(driverSetupAsDic["Id"].ToString()!, FromDic(driverSetupAsDic));
+        AddSetup(driverSetupAsDic);
 
     /// <summary>
     /// Constructor from driver setups
@@ -60,6 +60,21 @@ public class DriverFactory
     /// <param name="setups"></param>
     public DriverFactory(IDictionary<string, IDriverSetup> setups) : this() =>
         _setups = setups;
+
+    /// <summary>
+    /// Add new setup to dictionary
+    /// </summary>
+    /// <param name="setupId"></param>
+    /// <param name="setup"></param>
+    public void AddSetup(string setupId, IDriverSetup setup) =>
+        _setups.Add(setupId, setup);
+
+    /// <summary>
+    /// Add new setup from json to dictionary
+    /// </summary>
+    /// <param name="driverSetupAsDic">Driver options set as json dic</param>
+    public void AddSetup(IDictionary<string, object> driverSetupAsDic) =>
+        _setups.Add(driverSetupAsDic["Id"].ToString()!, FromDic(driverSetupAsDic));
 
     /// <summary>
     /// Get driver instance from driver setup

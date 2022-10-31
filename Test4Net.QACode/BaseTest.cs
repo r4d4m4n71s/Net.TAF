@@ -1,5 +1,11 @@
-﻿using Microsoft.Extensions.Configuration;
-using Test4Net.Test;
+﻿using System.Collections;
+using Microsoft.Extensions.Configuration;
+using Newtonsoft.Json;
+using Test4Net.Test.Interfaces;
+using Test4Net.Test.Models;
+using Test4Net.UITest;
+using Test4Net.UITest.Interfaces;
+using Test4Net.Util.Json;
 
 namespace Test4Net.QACode;
 
@@ -11,17 +17,21 @@ public abstract class BaseTest : AbstractTest
     /// </summary>
     protected static readonly string SetupPath = Path.Join(Directory.GetCurrentDirectory(), "/Configuration");
 
+    protected readonly IConfiguration Configuration;
+
     /// <summary>
     /// Init configuration from json settings
     /// </summary>
-    protected BaseTest() : base(configuration => configuration
-        .SetBasePath(SetupPath)
-        .AddEnvironmentVariables()
-        .AddJsonFile($"{Environment.GetEnvironmentVariable(Conventions.Env.Qa.ToString())}.settings.json", 
-            optional: true, reloadOnChange: true))
+    protected BaseTest()
     {
-        
-        Environment.SetEnvironmentVariable(Conventions.GlobalKeyVariables.AppEnvironment.ToString(), Conventions.Env.Qa.ToString());
+        Environment.SetEnvironmentVariable(Conventions.EnvironmentVariableName.AppEnv.ToString(), Conventions.Env.Qa.ToString());
+        Environment.SetEnvironmentVariable(Conventions.EnvironmentVariableName.BrowserProfile.ToString(), "Chrome");
+
+        Configuration = new ConfigurationBuilder()
+            .SetBasePath(SetupPath)
+            .AddEnvironmentVariables()
+            .AddJsonFile($"{Environment.GetEnvironmentVariable(Conventions.Env.Qa.ToString())}.settings.json",
+                optional: true, reloadOnChange: true).Build();
         LogProvider = ConfigureLogger(Configuration.GetSection("Logging"));
     }
 }

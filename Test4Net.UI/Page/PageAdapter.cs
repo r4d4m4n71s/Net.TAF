@@ -10,12 +10,12 @@ namespace Test4Net.UI.Page;
 /// </summary>
 public abstract class PageAdapter : IPage
 {
-    private readonly IBrowser _browser;
+    public readonly IBrowser Browser;
     private readonly IWebDriver _driver;
 
     protected PageAdapter(IBrowser browser, IPage parent = default)
     {
-        _browser = browser;
+        Browser = browser;
         Parent = parent;
         _driver = browser.Driver;
         JsExecutor = browser.JavaScript;

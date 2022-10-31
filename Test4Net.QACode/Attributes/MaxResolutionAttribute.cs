@@ -3,7 +3,7 @@
 namespace Test4Net.UITest.Models.Attributes;
 
 /// <summary>
-/// Size of the browser window, minus the scroll bars and tool bars
+/// ViewPort is the size of the browser window, determine by the avaible space in the screen
 /// </summary>
 [AttributeUsage(AttributeTargets.Class | AttributeTargets.Field, AllowMultiple = true)]
 public class ViewPortAttribute : Attribute

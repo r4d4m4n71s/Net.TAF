@@ -1,27 +1,14 @@
 ﻿namespace Test4Net.Test.Interfaces;
 
-public interface ITestContext 
+public interface ITestContext<T> where T : ITestConfiguration
 {
-        
     /// <summary>
-    /// Test results directory
+    /// Test case name
     /// </summary>
-    string TestResultsFolder { get; set; }
+    string TestName { get; set; }
 
     /// <summary>
-    /// Test logs directory for files
+    /// Test case configuration
     /// </summary>
-    string LogFolder { get; set; }
-}
-
-public class TestContext : ITestContext
-{
-    /// <inheritdoc />
-    public string TestName { get; set; }
-
-    /// <inheritdoc />
-    public string TestResultsFolder { get; set; }
-
-    /// <inheritdoc />
-    public string LogFolder { get; set; }
+    T Configuration { get; set; }
 }

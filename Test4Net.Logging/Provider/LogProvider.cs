@@ -25,7 +25,7 @@ public class LogProvider : ILogProvider
     /// Constructor
     /// </summary>
     /// <param name="decorateLogger">Perform builder decoration</param>
-    public LogProvider(Action<ILoggingBuilder> decorateLogger = null) => 
+    public LogProvider(Action<ILoggingBuilder> decorateLogger = null) =>
         _decorateLogger = decorateLogger;
 
     /// <summary>
@@ -34,15 +34,26 @@ public class LogProvider : ILogProvider
     /// </summary>
     /// <typeparam name="T">Target logging class</typeparam>
     /// <returns><see cref="ILog"/> instance</returns>
-    public ILog GetLogger<T>() => new LogAdapter<T>(GetNativeLogger<T>());
+    public ILog GetLogger<T>()
+    {
+        if (!LogInstances.ContainsKey(typeof(T)))
+            LogInstances.Add(typeof(T), new LogAdapter<T>(GetNativeLogger<T>()));
+
+        return (ILog)LogInstances[typeof(T)];
+    }
 
     /// <summary>
     /// Creates a new logger factory a returns a
     /// a new <see cref="ILog"/> instance
     /// </summary>
-    /// <typeparam name="T">Target logging class</typeparam>
     /// <returns><see cref="ILog"/> instance</returns>
-    public ILog GetLogger(Type type) => new LogAdapter(GetNativeLogger(type));
+    public ILog GetLogger(Type type)
+    {
+        if (!LogInstances.ContainsKey(type))
+            LogInstances.Add(type, new LogAdapter(GetNativeLogger(type)));
+
+        return (ILog)LogInstances[type];
+    }
 
     /// <summary>
     /// Creates a new logger factory a returns a
@@ -51,16 +62,15 @@ public class LogProvider : ILogProvider
     /// <returns><see cref="ILogger"/> instance</returns>
     public ILogger GetNativeLogger(Type target)
     {
-        if (LogInstances.ContainsKey(target))
-            return (ILogger)LogInstances[target];
+        if (!LogInstances.ContainsKey(target))
+        {
+            var logger = LoggerFactory.Create(_decorateLogger ??
+                (x => x.AddDebug().AddConsole().SetMinimumLevel(LogLevel.Information))).
+                CreateLogger(target);
+            LogInstances.Add(target, logger);
+        }
 
-        var logger = LoggerFactory.Create(_decorateLogger ?? 
-            (x => x.AddDebug().AddConsole().SetMinimumLevel(LogLevel.Information))).CreateLogger(target);
-        LogInstances.Add(target, logger);
-
-        // Todo: include this class as part of LoggerFactory services and return when needs, see log4net add to ILoggingBuilder example
-
-        return logger;  
+        return (ILogger)LogInstances[target];
     }
 
     /// <summary>
@@ -71,14 +81,15 @@ public class LogProvider : ILogProvider
     /// <returns><see cref="ILogger{T}"/> instance</returns>
     public ILogger<T> GetNativeLogger<T>()
     {
-        if (LogInstances.ContainsKey(typeof(T)))
-            return (ILogger<T>)LogInstances[typeof(T)];
+        if (!LogInstances.ContainsKey(typeof(T)))
+        {
+            var logger = LoggerFactory.Create(_decorateLogger ??
+                (x => x.AddDebug().AddConsole().SetMinimumLevel(LogLevel.Information))).
+                CreateLogger<T>();
+            LogInstances.Add(typeof(T), logger);
+        }
 
-        var logger = LoggerFactory.Create(_decorateLogger ??
-            (x => x.AddDebug().AddConsole().SetMinimumLevel(LogLevel.Information))).CreateLogger<T>();
-        LogInstances.Add(typeof(T), logger);
-
-        return logger;
+        return (ILogger<T>)LogInstances[typeof(T)];
     }
 }
 

@@ -7,7 +7,7 @@ namespace Test4Net.UI.Page;
 /// <summary>
 /// Provides page objects
 /// </summary>
-public class PageFactory
+public class PageFactory : IPageFactory
 {
     /// <summary>
     /// Log provider

@@ -7,6 +7,11 @@ namespace Test4Net.UI.Browser.Interfaces;
 /// </summary>
 public interface IBrowser
 {
+    /// <summary>
+    /// Configuration id when the browser was created
+    /// </summary>
+    string ConfigurationId { get; }
+
     /// <inheritdoc cref="IJavaScript"/>
     IJavaScript JavaScript { get; }
 

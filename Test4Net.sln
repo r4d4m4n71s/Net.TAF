@@ -9,6 +9,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Configuration", "Configurat
 	ProjectSection(SolutionItems) = preProject
 		Configuration\.runsettings = Configuration\.runsettings
 		Configuration\driver.settings.json = Configuration\driver.settings.json
+		Configuration\execution.settings.json = Configuration\execution.settings.json
 		Configuration\log4net.config = Configuration\log4net.config
 		Configuration\Qa.settings.json = Configuration\Qa.settings.json
 	EndProjectSection

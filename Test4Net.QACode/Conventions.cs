@@ -16,8 +16,9 @@ internal static class Conventions
     /// <summary>
     /// Define keys to global variables
     /// </summary>
-    public enum GlobalKeyVariables
+    public enum EnvironmentVariableName
     {
-        AppEnvironment
+        AppEnv,
+        BrowserProfile
     }
 }
