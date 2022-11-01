@@ -1,6 +1,6 @@
-﻿using Test4Net.UI.POM.Attributes;
-using Test4Net.UI.POM.Browser.Interfaces;
+﻿using Test4Net.UI.POM.Browser.Interfaces;
 using Test4Net.UI.POM.Page;
+using Test4Net.UI.POM.Page.Interfaces.Attributes;
 using Test4Net.UITest.Interfaces;
 
 namespace Test4Net.UITest.Models;

@@ -1,5 +1,4 @@
-﻿using FluentAssertions;
-using Microsoft.Extensions.Logging;
+﻿using Microsoft.Extensions.Logging;
 using Test4Net.Logging.Provider;
 
 namespace Test4Net.QACode.MSTest;
