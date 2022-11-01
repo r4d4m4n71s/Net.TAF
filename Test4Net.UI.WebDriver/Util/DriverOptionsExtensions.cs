@@ -285,7 +285,6 @@ public static class DriverOptionsExtensions
     {
         var enumType = propertyInfo.GetValue(target)?.GetType();
         var enumName = enumType?.GetEnumNames().FirstOrDefault(e => e.Equals(referenceValue, StringComparison.OrdinalIgnoreCase));
-
         Enum.TryParse(enumType!, enumName, out object enumValue);
         return enumValue;
     }

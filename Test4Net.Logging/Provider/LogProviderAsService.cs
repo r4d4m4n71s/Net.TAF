@@ -49,5 +49,5 @@ public class LogProviderAsService : ILogProvider
     /// </summary>
     /// <typeparam name="T">Target logging class</typeparam>
     /// <returns><see cref="ILogger{T}"/> instance</returns>
-    public ILogger<T> GetNativeLogger<T>() => _serviceProvider.GetService<ILogger<T>>();
+    public ILogger<T> GetNativeLogger<T>() => _serviceProvider.GetService<ILogger<T>>(); 
 }

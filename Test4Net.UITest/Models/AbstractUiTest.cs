@@ -43,5 +43,5 @@ public abstract class AbstractUiTest : AbstractTest
     /// </summary>
     /// <param name="page">target page to add rules</param>
     /// <returns>true if rules validation is success</returns>
-    protected abstract bool ValidatePageRules(AbstractPage page);
+    protected abstract bool ValidatePageRules(AbstractPage page); 
 }

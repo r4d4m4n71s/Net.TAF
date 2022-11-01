@@ -37,5 +37,5 @@ public abstract class AbstractTest
     /// Configure log from configuration section
     /// </summary>
     protected ILogProvider ConfigureLogger(IConfigurationSection loggerConfigurationSection) =>
-        ConfigureLogger(builder => builder.Decorate(loggerConfigurationSection));
+        ConfigureLogger(builder => builder.Decorate(loggerConfigurationSection)); 
 }

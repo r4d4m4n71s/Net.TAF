@@ -5,5 +5,5 @@
 /// </summary>
 public interface IViewPortSupportedAttribute
 {
-    string GetViewPortDefinition();
+    string GetViewPortDefinition(); 
 }
