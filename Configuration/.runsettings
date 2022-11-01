@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<RunSettings>
+	<!-- Configurations that affect the Test Framework
+  https://github.com/MicrosoftDocs/visualstudio-docs/blob/main/docs/test/configure-unit-tests-by-using-a-dot-runsettings-file.md-->
+	<!-- MSTest adapter -->
+	<MSTest>
+		<Parallelize>
+			<Workers>0</Workers>
+			<Scope>MethodLevel</Scope>
+		</Parallelize>
+		<!--Ensure the results folder is available after the test finish the exec when the agent async
+		<DeleteDeploymentDirectoryAfterTestRunIsComplete>False</DeleteDeploymentDirectoryAfterTestRunIsComplete>-->
+	</MSTest>
+</RunSettings>

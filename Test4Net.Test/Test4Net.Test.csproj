@@ -1,0 +1,34 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>net6.0</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>disable</Nullable>
+		<Description>Base model for automated test implementation</Description>
+		<RepositoryUrl>https://github.com/r4d4m4n71s/Test4Net/Test4Net.Test</RepositoryUrl>
+		<PackageTags>NetCore TestModel Library Test Automation Framework Test4Net</PackageTags>
+		<Title>Test Automation Base Framework</Title>
+		<PackageReadmeFile>README.md</PackageReadmeFile>
+		<Authors>John Edwin Franco</Authors>
+		<Product>Test4Net</Product>
+		<PackageProjectUrl>https://github.com/r4d4m4n71s/Test4Net/packages</PackageProjectUrl>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Microsoft.Extensions.Configuration" Version="6.0.1" />
+		<PackageReference Include="Microsoft.Extensions.Configuration.EnvironmentVariables" Version="6.0.1" />
+		<PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="6.0.0" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\Test4Net.Logging\Test4Net.Logging.csproj" />
+		<ProjectReference Include="..\Test4Net.Util\Test4Net.Util.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<None Update="README.md">
+			<PackagePath>\</PackagePath>
+			<Pack>True</Pack>
+		</None>
+	</ItemGroup>
+</Project>

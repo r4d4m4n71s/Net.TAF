@@ -1,0 +1,71 @@
+# Evaluates if there was changes into the repository since the last success 
+# if it's the case retrieves the root folder name and stores in a $(FolderUpdated) variable
+#https://stackoverflow.com/questions/53227343/triggering-azure-devops-builds-based-on-changes-to-sub-folders
+#https://learn.microsoft.com/en-us/rest/api/azure/devops/build/latest/get?view=azure-devops-rest-6.1
+
+[CmdletBinding()]
+param (
+    # Build [id or name] who's pushing changes to the repo, target branch to look up
+    [Parameter(Mandatory=$true,Position=1)][alias("definition-lookup")][string]$buidDefinitionLookUp,
+    [Parameter(Mandatory=$true,Position=2)][alias("branch-name")][string]$branch,  
+    
+    # Folder to look up assemblies
+    [Parameter(Mandatory=$true,Position=3)][alias("folder-lookup")][string]$folderLookup="./",
+    
+    # Included and excluded search criteria
+    [Parameter(Mandatory=$false,Position=4)][alias("projectLike-wildcard")][string]$projectLikeWildcard="*",
+    [Parameter(Mandatory=$false,Position=5)][alias("projectNotLike-wildcard")][string]$projectNotLikeWildcard="")
+
+# Query info of the latest build exec
+$url = "$($env:SYSTEM_TEAMFOUNDATIONCOLLECTIONURI)$env:SYSTEM_TEAMPROJECTID/_apis/build/latest/${buidDefinitionLookUp}?branchName=${branch}"
+           
+Write-Host "Latest get URL end point: $url"
+
+$branchCommitId = 'none'
+try{
+
+    $response = Invoke-RestMethod -Uri $url -Headers @{Authorization = "Bearer $env:SYSTEM_ACCESSTOKEN"}
+    Write-Host "StatusCode: $response.result"   
+    # id of the las commit
+    $branchCommitId = $response.sourceVersion
+
+}catch{
+    Write-Host "Error.. StatusCode:" $_.Exception.Response.status
+    hrow $_.Exception
+}
+
+# Get the (git diff) between the build and the repository
+$gitHeadCommit = git rev-parse HEAD
+Write-Host "Head commit: $gitHeadCommit"
+Write-Host "Branch $branch latest success commit: $branchCommitId"
+
+$editedFiles = git diff HEAD "$branchCommitId" --name-only
+
+$rootFolders = @()
+$editedFiles | ForEach-Object { 
+    # look up root folder into
+    $sepIndex = $_.IndexOf('/')
+    if($sepIndex -gt 0) {
+        $rootFolders += $_.substring(0, $sepIndex)
+    }
+}
+$rootFolders = $rootFolders | select -Unique
+Write-Host "Updated folders: "$rootFolders
+
+# match folder diferences between [repo] and [build latest commit]
+$matches = Get-ChildItem $folderLookup -Recurse |
+	Where-Object { 
+        $_.PsIsContainer -and 
+        $_.Name -like $projectLikeWildcard -and 
+        $_.Name -notlike $projectNotLikeWildcard -and 
+        $rootFolders -ne $null -and $rootFolders.Contains($_.Name) }
+
+if($matches -ne $null){
+    $matches = [system.String]::Join(",", $matches)
+}
+
+Write-Host "Matches with look up query: "$matches
+
+# set matched folder to global variable    
+Write-Host "##vso[task.setvariable variable=SourceCodeUpdated]"$matches
+Write-Host $env:ProjectsUpdated

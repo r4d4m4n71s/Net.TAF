@@ -1,0 +1,31 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>net6.0</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>disable</Nullable>
+		<Description>Net core logger. Can incorporate log4net with log4net aspNetCore extension.</Description>
+		<RepositoryUrl>https://github.com/r4d4m4n71s/Test4Net</RepositoryUrl>
+		<PackageTags>NetCore Logger Library Test Automation Framework Test4Net</PackageTags>
+		<Title>Test Automation Framework Logging</Title>
+		<PackageReadmeFile>README.md</PackageReadmeFile>
+		<Authors>John Edwin Franco</Authors>
+		<Product>Test4Net</Product>
+		<PackageProjectUrl>https://github.com/r4d4m4n71s/Test4Net/packages</PackageProjectUrl>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Microsoft.Extensions.Logging" Version="6.0.0" />
+		<PackageReference Include="Microsoft.Extensions.Logging.Configuration" Version="6.0.0" />
+		<PackageReference Include="Microsoft.Extensions.Logging.Console" Version="6.0.0" />
+		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="6.0.0" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<None Update="README.md">
+			<Pack>True</Pack>
+			<PackagePath>\</PackagePath>
+		</None>
+	</ItemGroup>
+
+</Project>

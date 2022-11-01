@@ -1,0 +1,76 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.3.32811.315
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SolutionItems", "SolutionItems", "{587207CF-8E0A-4A28-8226-A8646225E542}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Configuration", "Configuration", "{3032F298-9169-4201-AF83-C2EDEA0C3285}"
+	ProjectSection(SolutionItems) = preProject
+		Configuration\.runsettings = Configuration\.runsettings
+		Configuration\driver.settings.json = Configuration\driver.settings.json
+		Configuration\execution.settings.json = Configuration\execution.settings.json
+		Configuration\log4net.config = Configuration\log4net.config
+		Configuration\Qa.settings.json = Configuration\Qa.settings.json
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Scripts", "Scripts", "{559989FD-4237-4DAE-B49A-300FECF7E377}"
+	ProjectSection(SolutionItems) = preProject
+		Scripts\CoverletColector.ps1 = Scripts\CoverletColector.ps1
+		Scripts\LatestBuild_GitPathFiltering.ps1 = Scripts\LatestBuild_GitPathFiltering.ps1
+	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Test4Net.Logging", "Test4Net.Logging\Test4Net.Logging.csproj", "{9765C53C-2CA8-4AED-9660-094DCD5BA3A1}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Test4Net.Util", "Test4Net.Util\Test4Net.Util.csproj", "{28552142-9B44-4220-99D8-5F8826406BCB}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Test4Net.UI", "Test4Net.UI\Test4Net.UI.csproj", "{9AE858ED-72AC-4C2D-AD80-EB669EB2327E}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Test4Net.Test", "Test4Net.Test\Test4Net.Test.csproj", "{1E1E46EC-68E2-46AA-9F30-4FDD560EFA4E}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Test4Net.UITest", "Test4Net.UITest\Test4Net.UITest.csproj", "{7F579458-0C5B-4247-897C-0E4FC601D544}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Test4Net.QACode", "Test4Net.QACode\Test4Net.QACode.csproj", "{D8BFFCA5-8454-423B-8745-FEEF5E6DDEEF}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9765C53C-2CA8-4AED-9660-094DCD5BA3A1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9765C53C-2CA8-4AED-9660-094DCD5BA3A1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9765C53C-2CA8-4AED-9660-094DCD5BA3A1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9765C53C-2CA8-4AED-9660-094DCD5BA3A1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{28552142-9B44-4220-99D8-5F8826406BCB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{28552142-9B44-4220-99D8-5F8826406BCB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{28552142-9B44-4220-99D8-5F8826406BCB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{28552142-9B44-4220-99D8-5F8826406BCB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9AE858ED-72AC-4C2D-AD80-EB669EB2327E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9AE858ED-72AC-4C2D-AD80-EB669EB2327E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9AE858ED-72AC-4C2D-AD80-EB669EB2327E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9AE858ED-72AC-4C2D-AD80-EB669EB2327E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1E1E46EC-68E2-46AA-9F30-4FDD560EFA4E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1E1E46EC-68E2-46AA-9F30-4FDD560EFA4E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1E1E46EC-68E2-46AA-9F30-4FDD560EFA4E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1E1E46EC-68E2-46AA-9F30-4FDD560EFA4E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7F579458-0C5B-4247-897C-0E4FC601D544}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7F579458-0C5B-4247-897C-0E4FC601D544}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7F579458-0C5B-4247-897C-0E4FC601D544}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7F579458-0C5B-4247-897C-0E4FC601D544}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D8BFFCA5-8454-423B-8745-FEEF5E6DDEEF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D8BFFCA5-8454-423B-8745-FEEF5E6DDEEF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D8BFFCA5-8454-423B-8745-FEEF5E6DDEEF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D8BFFCA5-8454-423B-8745-FEEF5E6DDEEF}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{3032F298-9169-4201-AF83-C2EDEA0C3285} = {587207CF-8E0A-4A28-8226-A8646225E542}
+		{559989FD-4237-4DAE-B49A-300FECF7E377} = {587207CF-8E0A-4A28-8226-A8646225E542}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {2EA1A25B-2D78-400B-8A11-40CBED9C793E}
+	EndGlobalSection
+EndGlobal
