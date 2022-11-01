@@ -1,7 +1,7 @@
 ﻿namespace Test4Net.UI.POM.Page.Interfaces.Attributes;
 
 /// <summary>
-/// View port  attribute contract
+/// Browser View port size attribute contract
 /// </summary>
 public interface IViewPortSupportedAttribute
 {
