@@ -8,6 +8,11 @@ public class TestConfiguration : ITestConfiguration
     public TestConfiguration()
     { }
 
+    /// <summary>
+    /// Constructor from json dic
+    /// </summary>
+    /// <param name="fromJsonDic"></param>
+    /// <param name="name">Configuration key to look up into dic</param>
     public TestConfiguration(string fromJsonDic, string name)
     {
         Name = name;

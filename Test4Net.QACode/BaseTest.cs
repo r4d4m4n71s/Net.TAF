@@ -25,8 +25,7 @@ public abstract class BaseTest : AbstractTest
     protected BaseTest()
     {
         Environment.SetEnvironmentVariable(Conventions.EnvironmentVariableName.AppEnv.ToString(), Conventions.Env.Qa.ToString());
-        Environment.SetEnvironmentVariable(Conventions.EnvironmentVariableName.BrowserProfile.ToString(), "Chrome");
-
+        
         Configuration = new ConfigurationBuilder()
             .SetBasePath(SetupPath)
             .AddEnvironmentVariables()

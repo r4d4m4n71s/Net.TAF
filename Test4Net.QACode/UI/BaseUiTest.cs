@@ -1,6 +1,5 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Test4Net.UI.Browser;
-using Test4Net.UI.Driver;
 using Test4Net.UI.Page;
 using Test4Net.UITest.Models;
 using TestContext = Test4Net.UITest.Models.TestContext;
@@ -24,7 +23,8 @@ public abstract class BaseUiTest : AbstractUiTest
     /// </summary>
     protected BaseUiTest() 
     {
-        Environment.SetEnvironmentVariable(Conventions.EnvironmentVariableName.AppEnv.ToString(), Conventions.Env.Qa.ToString());
+        Environment.SetEnvironmentVariable(Conventions.EnvironmentVariableName.BrowserProfile.ToString(), "Chrome");
+        
         Configuration = new ConfigurationBuilder()
             .SetBasePath(SetupPath)
                 .AddEnvironmentVariables()
@@ -34,14 +34,12 @@ public abstract class BaseUiTest : AbstractUiTest
         LogProvider = ConfigureLogger(Configuration.GetSection("Logging"));
         
         DriverSettings = File.ReadAllText(Path.Combine(SetupPath, "driver.settings.json"));
-        
-        DriverFactory = new DriverFactory(DriverSettings);
 
-        var currentBrowserExecutionProfile =
+        var execProfile =
             Environment.GetEnvironmentVariable(Conventions.EnvironmentVariableName.BrowserProfile.ToString());
 
-        Context = new TestContext("testName", currentBrowserExecutionProfile, DriverSettings);
-        Browser = new BrowserAdapter(Context.Configuration.Name, DriverFactory.Get(Context.Configuration.Name));
+        Context = new TestContext(execProfile, DriverSettings);
+        BrowserFactory = new BrowserFactory(DriverSettings);
     }
 
     /// <summary>

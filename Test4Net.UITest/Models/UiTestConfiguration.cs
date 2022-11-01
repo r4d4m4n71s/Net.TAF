@@ -8,6 +8,11 @@ public class UiTestConfiguration : TestConfiguration, IUiTestConfiguration
     public UiTestConfiguration()
     { }
 
+    /// <summary>
+    /// Constructor from json dic
+    /// </summary>
+    /// <param name="fromJsonDic"></param>
+    /// <param name="name">Configuration key to look up into dic</param>
     public UiTestConfiguration(string fromJsonDic, string name) : base(fromJsonDic, name)
     {
         Platform = Values.ContainsKey(nameof(Platform)) ? Values[nameof(Platform)].ToString() : string.Empty;

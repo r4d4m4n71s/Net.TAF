@@ -1,17 +1,16 @@
 ﻿using Test4Net.Test.Interfaces;
-using Test4Net.UITest.Interfaces;
 
-namespace Test4Net.UITest.Models;
+namespace Test4Net.Test.Models;
 
 /// <summary>
 /// Test execution context
 /// </summary>
-public class TestContext : ITestContext<IUiTestConfiguration>
+public class TestContext : ITestContext<TestConfiguration>
 {
     /// <summary>
     /// Test case configuration
     /// </summary>
-    public IUiTestConfiguration Configuration { get; set; }
+    public TestConfiguration Configuration { get; set; }
 
     /// <summary>
     /// Constructor from json dic
@@ -20,6 +19,6 @@ public class TestContext : ITestContext<IUiTestConfiguration>
     /// <param name="fromJsonDic"></param>
     public TestContext(string configurationName, string fromJsonDic)
     {
-        Configuration = new UiTestConfiguration(fromJsonDic, configurationName);
+        Configuration = new TestConfiguration(fromJsonDic, configurationName);
     }
 }
