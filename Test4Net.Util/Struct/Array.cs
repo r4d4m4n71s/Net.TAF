@@ -10,5 +10,5 @@ public static class ArrayUtil
     /// <param name="item"></param>
     /// <returns></returns>
     public static T[] AppendFirst<T>(this T[] array, T item) => 
-        new List<T>(array).Prepend(item).ToArray(); 
+        new List<T>(array).Prepend(item).ToArray();
 }
