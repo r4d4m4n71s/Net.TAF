@@ -1,7 +1,7 @@
 ﻿using System.Collections.ObjectModel;
 using OpenQA.Selenium;
 
-namespace Net.TAF.QACode.Fakes;
+namespace Test4Net.QACode.Fakes;
 
 /// <summary>
 /// Simulates web driver

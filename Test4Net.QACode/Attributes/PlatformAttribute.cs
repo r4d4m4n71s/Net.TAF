@@ -1,6 +1,6 @@
-﻿using Test4Net.UITest.Constants;
+﻿using Test4Net.QACode.Constants;
 
-namespace Test4Net.UITest.Models.Attributes;
+namespace Test4Net.QACode.Attributes;
 
 /// <summary>
 /// Usage: Decorate pages and elements with a supported platform

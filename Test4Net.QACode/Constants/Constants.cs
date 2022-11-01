@@ -1,4 +1,4 @@
-﻿namespace Test4Net.UITest.Constants;
+﻿namespace Test4Net.QACode.Constants;
 
 /// <summary>
 /// View resolution abbr constant

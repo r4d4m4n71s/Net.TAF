@@ -1,6 +1,6 @@
 ﻿using System.Drawing;
 
-namespace Test4Net.UITest.Models.Attributes;
+namespace Test4Net.QACode.Attributes;
 
 /// <summary>
 /// ViewPort is the size of the browser window, determine by the avaible space in the screen

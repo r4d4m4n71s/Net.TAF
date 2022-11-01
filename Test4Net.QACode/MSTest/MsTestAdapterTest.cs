@@ -1,10 +1,6 @@
 ﻿using FluentAssertions;
 using Microsoft.Extensions.Logging;
-using OpenQA.Selenium;
-using SeleniumExtras.PageObjects;
 using Test4Net.Logging.Provider;
-using Test4Net.Test.Interfaces;
-using Test4Net.UI.Elements;
 
 namespace Test4Net.QACode.MSTest;
 
@@ -26,8 +22,8 @@ public class MsTestAdapterTest : BaseTest
         ConfigureLogger(builder =>
             builder.Decorate(Configuration.GetSection("Logging"))
                 .AddLog4Net(Path.Combine(Configuration["ConfigurationPath"], "log4net.config")));
-        
-        new Action(() => Log.Info("xxx")).Should().NotThrow();
+        Log.Info("xxx");
+        //new Action(() => Log.Info("xxx")).Should().NotThrow();
     }
 }
 

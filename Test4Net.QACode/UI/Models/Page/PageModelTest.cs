@@ -1,4 +1,4 @@
-﻿using Net.TAF.QACode.Fakes;
+﻿using Test4Net.QACode.Fakes;
 
 namespace Test4Net.QACode.UI.Models.Page;
 

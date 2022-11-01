@@ -26,7 +26,7 @@
 
 	<ItemGroup>
 		<ProjectReference Include="..\Test4Net.Test\Test4Net.Test.csproj" />
-		<ProjectReference Include="..\Test4Net.UI\Test4Net.UI.csproj" />
+		<ProjectReference Include="..\Test4Net.UI.POM\Test4Net.UI.POM.csproj" />
 	</ItemGroup>
 
 	<ItemGroup>

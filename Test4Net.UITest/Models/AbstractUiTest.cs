@@ -1,8 +1,8 @@
 ﻿using Test4Net.Test.Interfaces;
 using Test4Net.Test.Models;
-using Test4Net.UI.Browser.Interfaces;
-using Test4Net.UI.Page;
-using Test4Net.UI.Page.Interfaces;
+using Test4Net.UI.POM.Browser.Interfaces;
+using Test4Net.UI.POM.Page;
+using Test4Net.UI.POM.Page.Interfaces;
 using Test4Net.UITest.Interfaces;
 
 namespace Test4Net.UITest.Models;

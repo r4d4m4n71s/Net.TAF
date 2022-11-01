@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.Configuration;
-using Test4Net.UI.Browser;
-using Test4Net.UI.Page;
+using Test4Net.UI.POM.Browser;
+using Test4Net.UI.POM.Page;
 using Test4Net.UITest.Models;
 using TestContext = Test4Net.UITest.Models.TestContext;
 
