@@ -1,8 +1,9 @@
-﻿using Test4Net.Test.Interfaces;
+﻿using Test4Net.Logging.Interfaces;
+using Test4Net.Test.Interfaces;
 using Test4Net.Test.Models;
-using Test4Net.UI.POM.Browser.Interfaces;
 using Test4Net.UI.POM.Page;
 using Test4Net.UI.POM.Page.Interfaces;
+using Test4Net.UI.WebBrowser.Browser.Interfaces;
 using Test4Net.UITest.Interfaces;
 
 namespace Test4Net.UITest.Models;
@@ -11,16 +12,14 @@ namespace Test4Net.UITest.Models;
 /// </summary>
 public abstract class AbstractUiTest : AbstractTest
 {
-    /// <inheritdoc cref="PageFactory"/>
-    private readonly IPageFactory _pageFactory = new PageFactory(LogProvider);
-
     /// <summary>
-    /// Browser factory
+    /// Test context
     /// </summary>
-    protected IBrowserFactory BrowserFactory { get; set; }
-
-    /// <inheritdoc cref="AbstractTest.Context"/>
     protected new ITestContext<IUiTestConfiguration> Context { get; set; }
+
+    /// <inheritdoc cref="UI.POM.Page.PageFactory"/>
+    protected IPageFactory PageFactory { get; set; }
+
 
     /// <summary>
     /// Builds a page, validates and return it.
@@ -29,7 +28,7 @@ public abstract class AbstractUiTest : AbstractTest
     /// <returns></returns>
     protected T GetPage<T>() where T : AbstractPage
     {
-        var page = _pageFactory.GetPage<T>(BrowserFactory.Get(Context.Configuration.Name));
+        var page = PageFactory.GetPage<T>();
 
         // Derive page rules validation to the concrete test class
         if (ValidatePageRules(page))

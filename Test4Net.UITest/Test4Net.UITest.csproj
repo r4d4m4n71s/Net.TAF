@@ -21,12 +21,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <PackageReference Include="Microsoft.TestPlatform.TestHost" Version="17.3.2" />
-	</ItemGroup>
-
-	<ItemGroup>
 		<ProjectReference Include="..\Test4Net.Test\Test4Net.Test.csproj" />
 		<ProjectReference Include="..\Test4Net.UI.POM\Test4Net.UI.POM.csproj" />
+		<ProjectReference Include="..\Test4Net.UI.WebBrowser\Test4Net.UI.WebBrowser.csproj" />
 	</ItemGroup>
 
 	<ItemGroup>

@@ -2,9 +2,9 @@
 using OpenQA.Selenium.Edge;
 using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.Remote;
-using Test4Net.UI.WebDriver.Driver;
-using Test4Net.UI.WebDriver.Driver.Configuration.Type.Flavors;
-using Test4Net.UI.WebDriver.Util;
+using Test4Net.UI.WebBrowser.Driver;
+using Test4Net.UI.WebBrowser.Driver.Configuration.Type.Flavors;
+using Test4Net.UI.WebBrowser.Util;
 
 namespace Test4Net.QACode.UI.Driver.Configuration;
 

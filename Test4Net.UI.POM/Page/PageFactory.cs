@@ -1,6 +1,5 @@
-﻿using Test4Net.Logging.Interfaces;
-using Test4Net.UI.POM.Browser.Interfaces;
-using Test4Net.UI.POM.Page.Interfaces;
+﻿using Test4Net.UI.POM.Page.Interfaces;
+using Test4Net.UI.WebBrowser.Browser.Interfaces;
 
 namespace Test4Net.UI.POM.Page;
 
@@ -10,21 +9,20 @@ namespace Test4Net.UI.POM.Page;
 public class PageFactory : IPageFactory
 {
     /// <summary>
-    /// Log provider
+    /// Browser
     /// </summary>
-    private readonly ILogProvider _logProvider;
+    private readonly IWebBrowser _webBrowser;
 
-    public PageFactory(ILogProvider logProvider) => 
-        _logProvider = logProvider;
+    public PageFactory(IWebBrowser webBrowser) => 
+        _webBrowser = webBrowser;
 
     /// <summary>
     /// Get page instance
     /// </summary>
     /// <typeparam name="T">Page type</typeparam>
-    /// <param name="browser">Browser instance</param>
     /// <returns></returns>
-    public T GetPage<T>(IBrowser browser) where T : IPage => 
-        GetPage<T>(browser, _logProvider.GetLogger<T>());
+    public T GetPage<T>() where T : IPage => 
+        GetPage<T>(_webBrowser);
 
     /// <summary>
     /// Get page instance from args

@@ -32,7 +32,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Test4Net.QACode", "Test4Net
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test4Net.UI.POM", "Test4Net.UI.POM\Test4Net.UI.POM.csproj", "{0A1E228B-274C-4BDB-9B9A-ED5E2C06188D}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Test4Net.UI.WebDriver", "Test4Net.UI.WebDriver\Test4Net.UI.WebDriver.csproj", "{D5EE72D9-9619-4F1D-A176-EB247614B519}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Test4Net.UI.WebBrowser", "Test4Net.UI.WebBrowser\Test4Net.UI.WebBrowser.csproj", "{49DB62E4-57F6-43D0-9D23-1AED70C8749E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -64,10 +64,10 @@ Global
 		{0A1E228B-274C-4BDB-9B9A-ED5E2C06188D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0A1E228B-274C-4BDB-9B9A-ED5E2C06188D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0A1E228B-274C-4BDB-9B9A-ED5E2C06188D}.Release|Any CPU.Build.0 = Release|Any CPU
-		{D5EE72D9-9619-4F1D-A176-EB247614B519}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D5EE72D9-9619-4F1D-A176-EB247614B519}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D5EE72D9-9619-4F1D-A176-EB247614B519}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D5EE72D9-9619-4F1D-A176-EB247614B519}.Release|Any CPU.Build.0 = Release|Any CPU
+		{49DB62E4-57F6-43D0-9D23-1AED70C8749E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{49DB62E4-57F6-43D0-9D23-1AED70C8749E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{49DB62E4-57F6-43D0-9D23-1AED70C8749E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{49DB62E4-57F6-43D0-9D23-1AED70C8749E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

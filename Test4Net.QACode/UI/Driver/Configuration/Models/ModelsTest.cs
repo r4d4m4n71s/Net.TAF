@@ -6,8 +6,8 @@ using OpenQA.Selenium.Chromium;
 using OpenQA.Selenium.Edge;
 using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.Safari;
-using Test4Net.UI.WebDriver.Driver.Configuration.Models;
-using Test4Net.UI.WebDriver.Util;
+using Test4Net.UI.WebBrowser.Driver.Configuration.Models;
+using Test4Net.UI.WebBrowser.Util;
 using Test4Net.Util.Json;
 
 namespace Test4Net.QACode.UI.Driver.Configuration.Models;

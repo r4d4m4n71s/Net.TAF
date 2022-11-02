@@ -1,6 +1,6 @@
-﻿using Test4Net.UI.POM.Browser.Interfaces;
-using Test4Net.UI.POM.Page;
+﻿using Test4Net.UI.POM.Page;
 using Test4Net.UI.POM.Page.Interfaces.Attributes;
+using Test4Net.UI.WebBrowser.Browser.Interfaces;
 using Test4Net.UITest.Interfaces;
 
 namespace Test4Net.UITest.Models;
@@ -108,7 +108,7 @@ public static class DefaultPageRules
         }
 
         // Any page that doesn't supports the testing browser must raise exception
-        if (faults.Any(f => f.Owner.GetInterface(nameof(IBrowser)) != null))
+        if (faults.Any(f => f.Owner.GetInterface(nameof(IWebBrowser)) != null))
         {
             var browser = testConfiguration.Browser;
             throw new InvalidOperationException($"There are rules that doesn't meets the {browser} browser criteria.");

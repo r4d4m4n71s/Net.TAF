@@ -1,6 +1,4 @@
-﻿using Test4Net.Logging.Interfaces;
-
-namespace Test4Net.UI.POM.Page;
+﻿namespace Test4Net.UI.POM.Page;
 
 /// <summary>
 /// Validation rules model
@@ -8,18 +6,11 @@ namespace Test4Net.UI.POM.Page;
 public class ValidationRules : Dictionary<string, Rule>
 {
     /// <summary>
-    /// Logger
-    /// </summary>
-    protected readonly ILog _log;
-
-    /// <summary>
     /// Constructor
     /// </summary>
-    /// <param name="log">logger</param>
     /// <param name="defaultRules"></param>
-    public ValidationRules(ILog log, List<Rule> defaultRules = null)
+    public ValidationRules(List<Rule> defaultRules = null)
     {
-        _log = log;
         if(defaultRules != null)
             foreach (var rule in defaultRules)
                 Add(rule);
@@ -58,12 +49,10 @@ public class ValidationRules : Dictionary<string, Rule>
     {
         if (ContainsKey(rule.Id))
         {
-            _log.Info($"Overwriting [{id}] validation rule.");
             this[id] = rule;
         }
         else
         {
-            _log.Info($"Adding [{id}] validation rule.");
             base.Add(id, rule);
         }
     }
@@ -79,11 +68,6 @@ public class ValidationRules : Dictionary<string, Rule>
         {
             if (!rule.IsValid)
             {
-                _log.Warn($"Rule [{rule.Id}] is not valid.");
-
-                if (string.IsNullOrEmpty(rule.Definition))
-                    _log.Info($"Rule definition: {rule.Definition}");
-
                 faults.Add(rule);
             }
         }

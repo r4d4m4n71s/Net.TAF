@@ -12,14 +12,14 @@ namespace Test4Net.Test.Models;
 public abstract class AbstractTest
 {
     /// <summary>
+    /// Log provider
+    /// </summary>
+    protected ILogProvider LogProvider;
+
+    /// <summary>
     /// Test context
     /// </summary>
     protected ITestContext<ITestConfiguration> Context { get; set; }
-
-    /// <summary>
-    /// Log provider
-    /// </summary>
-    protected static ILogProvider LogProvider = new LogProvider();
 
     /// <summary>
     /// Log test messages 

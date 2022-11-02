@@ -1,8 +1,8 @@
 ﻿using Test4Net.Logging.Interfaces;
 using Test4Net.QACode.Attributes;
 using Test4Net.QACode.Constants;
-using Test4Net.UI.POM.Browser.Interfaces;
 using Test4Net.UI.POM.Page;
+using Test4Net.UI.WebBrowser.Browser.Interfaces;
 
 namespace Test4Net.QACode.Fakes;
 
@@ -10,8 +10,6 @@ namespace Test4Net.QACode.Fakes;
 [ViewPort(1024, 768)]
 public class FakePageModel : AbstractPage
 {
-    public FakePageModel(IBrowser browser, ILog log) : base(browser, log)
-    {
-        
-    }
+    public FakePageModel(IWebBrowser browser, ILog log) : base(browser)
+    { }
 }

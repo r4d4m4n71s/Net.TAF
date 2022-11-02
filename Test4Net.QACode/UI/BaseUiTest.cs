@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.Configuration;
-using Test4Net.UI.POM.Browser;
 using Test4Net.UI.POM.Page;
+using Test4Net.UI.WebBrowser.Browser;
+using Test4Net.UI.WebBrowser.Browser.Interfaces;
 using Test4Net.UITest.Models;
 using TestContext = Test4Net.UITest.Models.TestContext;
 
@@ -17,6 +18,12 @@ public abstract class BaseUiTest : AbstractUiTest
     /// Path to folder with configurations
     /// </summary>
     protected static readonly string SetupPath = Path.Join(Directory.GetCurrentDirectory(), "/Configuration");
+
+    /// <summary>
+    /// Browser factory
+    /// </summary>
+    protected IBrowserFactory BrowserFactory { get; set; }
+
 
     /// <summary>
     /// Init configuration from json settings
@@ -40,8 +47,9 @@ public abstract class BaseUiTest : AbstractUiTest
 
         Context = new TestContext(execProfile, DriverSettings);
         BrowserFactory = new BrowserFactory(DriverSettings);
+        PageFactory = new PageFactory(BrowserFactory.Get(Context.Configuration.Name));
     }
-
+    
     /// <summary>
     /// Define validate rules <see cref="ValidatePageRules"/> for a page
     /// </summary>

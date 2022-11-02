@@ -1,7 +1,7 @@
 ﻿using System.Collections.ObjectModel;
 using OpenQA.Selenium;
-using Test4Net.UI.POM.Browser.Interfaces;
 using Test4Net.UI.POM.Page.Interfaces;
+using Test4Net.UI.WebBrowser.Browser.Interfaces;
 
 namespace Test4Net.UI.POM.Page;
 
@@ -10,10 +10,10 @@ namespace Test4Net.UI.POM.Page;
 /// </summary>
 public abstract class PageAdapter : IPage
 {
-    public readonly IBrowser Browser;
+    public readonly IWebBrowser Browser;
     private readonly IWebDriver _driver;
 
-    protected PageAdapter(IBrowser browser, IPage parent = default)
+    protected PageAdapter(IWebBrowser browser, IPage parent = default)
     {
         Browser = browser;
         Parent = parent;
