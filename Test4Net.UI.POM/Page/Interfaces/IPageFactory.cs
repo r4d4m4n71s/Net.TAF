@@ -12,6 +12,6 @@ namespace Test4Net.UI.POM.Page.Interfaces
         /// </summary>
         /// <typeparam name="T">Page type</typeparam>
         /// <returns></returns>
-        public T GetPage<T>() where T : IPage;
+        public T GetPage<T>(params object[] args) where T : IPage;
     }
 }

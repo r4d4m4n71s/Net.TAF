@@ -49,7 +49,6 @@
     "Arguments": [
       "--start-maximized",
       "--incognito",
-      //"--headless",
       "--disable-extensions",
       "--ignore-certificate-errors",
       "--disable-popup-blocking"

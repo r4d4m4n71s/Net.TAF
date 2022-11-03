@@ -7,7 +7,7 @@ namespace Test4Net.UI.WebBrowser.Browser
     /// <summary>
     /// Browser instances factory
     /// </summary>
-    public class BrowserFactory : IBrowserFactory
+    public class BrowserFactory : IBrowserFactory, IDisposable
     {
         /// <summary>
         /// Driver factory to process requests
@@ -27,18 +27,7 @@ namespace Test4Net.UI.WebBrowser.Browser
         {
             _driverFactory = driverFactory;
         }
-
-        /// <summary>
-        /// Creates new browser factory and sets
-        /// a new driver factory using a json with a list
-        /// of driver configurations <see cref="DriverFactory"/>
-        /// </summary>
-        /// <param name="driverSettingsAsJson">Dic of driver configurations in json format</param>
-        public BrowserFactory(string driverSettingsAsJson)
-        {
-            _driverFactory = new DriverFactory(driverSettingsAsJson);
-        }
-
+        
         /// <summary>
         /// Gets a browser instance from configuration id
         /// </summary>
@@ -60,5 +49,25 @@ namespace Test4Net.UI.WebBrowser.Browser
         /// <returns></returns>
         /// <exception cref="NotImplementedException"></exception>
         public T Get<T>(string setupId) where T : IWebBrowser => (T)Get(setupId);
+
+        /// <summary>
+        /// Disposes a browser from dic
+        /// </summary>
+        /// <param name="setupId"></param>
+        public void Dispose(string setupId)
+        {
+            ((DriverFactory)_driverFactory).Dispose(setupId);
+            _browserInstances.Remove(setupId);
+            //GC.SuppressFinalize(_drivers[setupId]);
+        }
+
+        /// <summary>
+        /// Disposes all browsers from dic
+        /// </summary>
+        public void Dispose()
+        {
+            ((DriverFactory)_driverFactory).Dispose();
+            _browserInstances.Clear();
+        }
     }
 }

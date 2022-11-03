@@ -8,6 +8,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Configuration", "Configuration", "{3032F298-9169-4201-AF83-C2EDEA0C3285}"
 	ProjectSection(SolutionItems) = preProject
 		Configuration\.runsettings = Configuration\.runsettings
+		Configuration\Dev.settings.json = Configuration\Dev.settings.json
 		Configuration\driver.settings.json = Configuration\driver.settings.json
 		Configuration\execution.settings.json = Configuration\execution.settings.json
 		Configuration\log4net.config = Configuration\log4net.config
@@ -30,7 +31,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Test4Net.UITest", "Test4Net
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Test4Net.QACode", "Test4Net.QACode\Test4Net.QACode.csproj", "{D8BFFCA5-8454-423B-8745-FEEF5E6DDEEF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test4Net.UI.POM", "Test4Net.UI.POM\Test4Net.UI.POM.csproj", "{0A1E228B-274C-4BDB-9B9A-ED5E2C06188D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Test4Net.UI.POM", "Test4Net.UI.POM\Test4Net.UI.POM.csproj", "{0A1E228B-274C-4BDB-9B9A-ED5E2C06188D}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Test4Net.UI.WebBrowser", "Test4Net.UI.WebBrowser\Test4Net.UI.WebBrowser.csproj", "{49DB62E4-57F6-43D0-9D23-1AED70C8749E}"
 EndProject

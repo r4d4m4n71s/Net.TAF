@@ -14,12 +14,21 @@ public abstract class AbstractTest
     /// <summary>
     /// Log provider
     /// </summary>
-    protected ILogProvider LogProvider;
+    protected static ILogProvider LogProvider { get; set; }
 
     /// <summary>
     /// Test context
     /// </summary>
-    protected ITestContext<ITestConfiguration> Context { get; set; }
+    protected IExecutionContext<ITestConfiguration> ExecContext { get; init; }
+
+    public AbstractTest(ILogProvider logProvider, IExecutionContext<ITestConfiguration> execContext)
+    {
+        LogProvider = logProvider;
+        ExecContext = execContext;
+    }
+    
+    public AbstractTest()
+    { }
 
     /// <summary>
     /// Log test messages 

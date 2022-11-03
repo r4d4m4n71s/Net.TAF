@@ -9,7 +9,7 @@ public class ValidationRules : Dictionary<string, Rule>
     /// Constructor
     /// </summary>
     /// <param name="defaultRules"></param>
-    public ValidationRules(List<Rule> defaultRules = null)
+    public ValidationRules(IEnumerable<Rule> defaultRules = null)
     {
         if(defaultRules != null)
             foreach (var rule in defaultRules)
@@ -34,8 +34,9 @@ public class ValidationRules : Dictionary<string, Rule>
     /// </summary>
     /// <param name="rules">list of rules</param>
     /// <returns>this as fluent</returns>
-    public ValidationRules Add(List<Rule> rules){
-        rules.ForEach(rule => Add(rule));
+    public ValidationRules Add(IEnumerable<Rule> rules){
+        foreach (var rule in rules)
+            Add(rule);
         return this;
     }
 
@@ -61,7 +62,7 @@ public class ValidationRules : Dictionary<string, Rule>
     /// Perform rules validation
     /// </summary>
     /// <returns></returns>
-    public virtual bool ValidateRules(Func<List<Rule>, bool> negotiateFaults)
+    public virtual bool Validate(Func<IEnumerable<Rule>, bool> negotiateFaults)
     {
         var faults = new List<Rule>();
         foreach (var rule in Values)
@@ -74,6 +75,13 @@ public class ValidationRules : Dictionary<string, Rule>
 
         return negotiateFaults(faults);
     }
+
+    /// <summary>
+    /// Rules to list
+    /// </summary>
+    /// <returns></returns>
+    public IEnumerable<Rule> ToList() =>
+        Values.ToList();
 }
 
 /// <summary>

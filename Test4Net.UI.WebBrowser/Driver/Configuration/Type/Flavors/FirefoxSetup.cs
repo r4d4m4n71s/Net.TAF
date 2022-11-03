@@ -34,7 +34,11 @@ public class FirefoxSetup : AbstractSetup<FirefoxOptions>
     { }
 
     /// <inheritdoc/>
-    public override FirefoxDriver Create() => string.IsNullOrEmpty(Builder.Options.AsDic()["driverPath"].ToString()) ?
-        new FirefoxDriver(Builder.Options) :
-        new FirefoxDriver(Builder.Options.AsDic()["driverPath"].ToString(), Builder.Options);
+    public override FirefoxDriver Create()
+    {
+        if (Builder.Options.AsDic().ContainsKey("driverPath"))
+            return new FirefoxDriver(Builder.Options.AsDic()["driverPath"].ToString(), Builder.Options);
+
+        return new FirefoxDriver(Builder.Options);
+    }
 }

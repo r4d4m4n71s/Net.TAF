@@ -34,7 +34,12 @@ public class ChromeSetup : AbstractSetup<ChromeOptions>
     { }
 
     /// <inheritdoc/>
-    public override ChromeDriver Create() => string.IsNullOrEmpty(Builder.Options.AsDic()["driverPath"].ToString()) ?
-        new ChromeDriver(Builder.Options) :
-        new ChromeDriver(Builder.Options.AsDic()["driverPath"].ToString(), Builder.Options);
+    public override ChromeDriver Create()
+    {
+        if (Builder.Options.AsDic().ContainsKey("driverPath"))
+            return new ChromeDriver(Builder.Options.AsDic()["driverPath"].ToString(), Builder.Options);
+
+        return new ChromeDriver(Builder.Options);
+    }
+    
 }

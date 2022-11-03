@@ -1,34 +1,30 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Test4Net.UI.POM.Page;
-using Test4Net.UI.WebBrowser.Browser;
-using Test4Net.UI.WebBrowser.Browser.Interfaces;
+using Test4Net.UI.POM.Page.Interfaces;
 using Test4Net.UITest.Models;
-using TestContext = Test4Net.UITest.Models.TestContext;
+using ExecutionContext = Test4Net.UITest.Models.ExecutionContext;
 
 namespace Test4Net.QACode.UI;
 
 [TestClass]
 public abstract class BaseUiTest : AbstractUiTest
 {
-    protected string DriverSettings { get; }
-
-    protected readonly IConfiguration Configuration;
-
     /// <summary>
     /// Path to folder with configurations
     /// </summary>
     protected static readonly string SetupPath = Path.Join(Directory.GetCurrentDirectory(), "/Configuration");
 
-    /// <summary>
-    /// Browser factory
-    /// </summary>
-    protected IBrowserFactory BrowserFactory { get; set; }
+    protected static string DriverSettings { get; } = File.ReadAllText(Path.Combine(SetupPath, "driver.settings.json"));
 
-
+    protected readonly IConfiguration Configuration;
+    
     /// <summary>
     /// Init configuration from json settings
     /// </summary>
-    protected BaseUiTest() 
+    protected BaseUiTest() :base(
+        new ExecutionContext(Environment.GetEnvironmentVariable(
+                Conventions.EnvironmentVariableName.BrowserProfile.ToString(), EnvironmentVariableTarget.User),
+            DriverSettings))
     {
         Environment.SetEnvironmentVariable(Conventions.EnvironmentVariableName.BrowserProfile.ToString(), "Chrome");
         
@@ -39,28 +35,19 @@ public abstract class BaseUiTest : AbstractUiTest
                     optional: true, reloadOnChange: true).Build();
 
         LogProvider = ConfigureLogger(Configuration.GetSection("Logging"));
-        
-        DriverSettings = File.ReadAllText(Path.Combine(SetupPath, "driver.settings.json"));
-
-        var execProfile =
-            Environment.GetEnvironmentVariable(Conventions.EnvironmentVariableName.BrowserProfile.ToString());
-
-        Context = new TestContext(execProfile, DriverSettings);
-        BrowserFactory = new BrowserFactory(DriverSettings);
-        PageFactory = new PageFactory(BrowserFactory.Get(Context.Configuration.Name));
     }
-    
+
     /// <summary>
-    /// Define validate rules <see cref="ValidatePageRules"/> for a page
+    /// Define validate rules <see cref="ValidationRules"/> for a page
     /// </summary>
     /// <param name="page">target page to add rules</param>
     /// <returns>true if rules validation is success</returns>
-    protected override bool ValidatePageRules(AbstractPage page)
+    protected override bool DefineDefaultPageRules(IPage page)
     {
-        page.Rules.AddPlatformRule(Context.Configuration.Platform)
-            .AddBrowserRule(Context.Configuration.Browser)
-            .AddViewPortRule(Context.Configuration.ViewPort);
+        page.Rules.AddPlatformRule(ExecContext.Configuration.Platform)
+            .AddBrowserRule(ExecContext.Configuration.Browser)
+            .AddViewPortRule(ExecContext.Configuration.ViewPort);
 
-        return page.Rules.ValidateRules(faults => faults.NegotiateDefaultRules(Context.Configuration));
+        return page.Rules.Validate(faults => faults.NegotiateDefaultRules(ExecContext.Configuration));
     }
 }

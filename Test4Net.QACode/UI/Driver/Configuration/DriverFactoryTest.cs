@@ -13,9 +13,12 @@ public class DriverFactoryTest : BaseUiTest
 {
     [TestMethod]
     [TestCategory("integration")]
-    public void CreateChromeLocal_FromConfiguration_Ok() =>
-        new DriverFactory( DriverSettings.CreateOptionsStructure("Chrome")).Get("Chrome").Dispose();
-
+    public void CreateChromeLocal_FromConfiguration_Ok()
+    {
+        var optionsDic = DriverSettings.CreateOptionsStructure("Chrome");
+        new DriverFactory(optionsDic["Id"].ToString(), optionsDic).Get("Chrome").Dispose();
+    }
+    
     [TestMethod]
     [TestCategory("integration")]
     public void CreateEdgeLocal_FromConfiguration_Ok() =>
@@ -47,11 +50,17 @@ public class DriverFactoryTest : BaseUiTest
 
     [TestMethod]
     [TestCategory("integration")]
-    public void CreateBrowserStackChrome_FromConfiguration_Ok() =>
-        new DriverFactory(DriverSettings.CreateOptionsStructure("BSWin11Chrome")).Get<RemoteWebDriver>("BSWin11Chrome").Dispose();
+    public void CreateBrowserStackChrome_FromConfiguration_Ok()
+    {
+        var optionsDic = DriverSettings.CreateOptionsStructure("BSWin11Chrome");
+        new DriverFactory(optionsDic["Id"].ToString(), optionsDic).Get<RemoteWebDriver>("BSWin11Chrome").Dispose();
+    }
 
     [TestMethod]
     [TestCategory("integration")]
-    public void CreateBrowserStackEdge_FromConfiguration_Ok() =>
-        new DriverFactory(DriverSettings.CreateOptionsStructure("BSWin11Edge")).Get("BSWin11Edge").Dispose();
+    public void CreateBrowserStackEdge_FromConfiguration_Ok()
+    {
+        var optionsDic = DriverSettings.CreateOptionsStructure("BSWin11Edge");
+        new DriverFactory(optionsDic["Id"].ToString(), optionsDic).Get("BSWin11Edge").Dispose();
+    }
 }

@@ -1,5 +1,6 @@
 ﻿using System.Collections.ObjectModel;
 using OpenQA.Selenium;
+using Test4Net.UI.WebBrowser.Browser.Interfaces;
 
 namespace Test4Net.UI.POM.Page.Interfaces;
 
@@ -11,7 +12,7 @@ public interface IPage : IWebDriver
     /// <summary>
     /// The parent page.
     /// </summary>
-    public IPage Parent { get; }
+    public IPage Parent { get; set; }
 
     /// <summary>
     /// Gets the title of the current browser window.
@@ -37,7 +38,7 @@ public interface IPage : IWebDriver
     /// Navigate to url
     /// </summary>
     /// <param name="url"></param>
-    void GoToUrl(string url);
+    void GoToUrl(Uri url);
 
     /// <summary>
     /// Finds the first IWebElement using the given method.
@@ -102,4 +103,14 @@ public interface IPage : IWebDriver
     /// <typeparam name="T">A type T.</typeparam>
     /// <returns>An object of type T.</returns>
     T FindParent<T>() where T : IPage;
+
+    /// <summary>
+    /// Define rules to validate page
+    /// </summary>
+    ValidationRules Rules { get; set; }
+
+    /// <summary>
+    /// Related browser
+    /// </summary>
+    IWebBrowser Browser { get; }
 }

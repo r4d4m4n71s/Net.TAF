@@ -34,7 +34,11 @@ public class SafariSetup : AbstractSetup<SafariOptions>
     { }
 
     /// <inheritdoc/>
-    public override SafariDriver Create() => string.IsNullOrEmpty(Builder.Options.AsDic()["driverPath"].ToString()) ?
-        new SafariDriver(Builder.Options) :
-        new SafariDriver(Builder.Options.AsDic()["driverPath"].ToString(), Builder.Options);
+    public override SafariDriver Create()
+    {
+        if (Builder.Options.AsDic().ContainsKey("driverPath"))
+            return new SafariDriver(Builder.Options.AsDic()["driverPath"].ToString(), Builder.Options);
+
+        return new SafariDriver(Builder.Options);
+    }
 }

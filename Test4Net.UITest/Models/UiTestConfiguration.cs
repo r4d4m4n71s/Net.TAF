@@ -12,8 +12,8 @@ public class UiTestConfiguration : TestConfiguration, IUiTestConfiguration
     /// Constructor from json dic
     /// </summary>
     /// <param name="fromJsonDic"></param>
-    /// <param name="name">Configuration key to look up into dic</param>
-    public UiTestConfiguration(string fromJsonDic, string name) : base(fromJsonDic, name)
+    /// <param name="id">Configuration key to look up into dic</param>
+    public UiTestConfiguration(string fromJsonDic, string id) : base(fromJsonDic, id)
     {
         Platform = Values.ContainsKey(nameof(Platform)) ? Values[nameof(Platform)].ToString() : string.Empty;
         Browser = Values.ContainsKey(nameof(Browser)) ? Values[nameof(Browser)].ToString() : string.Empty;

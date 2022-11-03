@@ -98,7 +98,7 @@ public static class DefaultPageRules
     /// <param name="testConfiguration"></param>
     /// <returns>true if negotiation is success</returns>
     /// <exception cref="InvalidOperationException">In case of critical faults</exception>
-    public static bool NegotiateDefaultRules(this List<Rule> faults, IUiTestConfiguration testConfiguration)
+    public static bool NegotiateDefaultRules(this IEnumerable<Rule> faults, IUiTestConfiguration testConfiguration)
     {
         // Any page that doesn't supports the testing platform must raise exception
         if (faults.Any(f => f.Owner.GetInterface(nameof(IPlatformSupportedAttribute)) != null))

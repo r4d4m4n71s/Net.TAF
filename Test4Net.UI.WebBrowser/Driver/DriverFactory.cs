@@ -8,7 +8,7 @@ namespace Test4Net.UI.WebBrowser.Driver;
 /// <summary>
 /// Selenium web driver factory
 /// </summary>
-public class DriverFactory : IDriverFactory
+public class DriverFactory : IDriverFactory, IDisposable
 {
     /// <summary>
     /// Driver setups
@@ -49,10 +49,11 @@ public class DriverFactory : IDriverFactory
     /// If driver exist factory returns it, on the contrary factory creates a new one,
     /// adds to factory list and returns it
     /// </summary>
+    /// <param name="setupId">Setup id</param>
     /// <param name="driverSetupAsDic">Driver options set as json dic</param>
     /// <returns>Driver instance</returns>
-    public DriverFactory(IDictionary<string, object> driverSetupAsDic) : this() =>
-        AddSetup(driverSetupAsDic);
+    public DriverFactory(string setupId, IDictionary<string, object> driverSetupAsDic) : this() =>
+        AddSetup(setupId, driverSetupAsDic);
 
     /// <summary>
     /// Constructor from driver setups
@@ -72,9 +73,10 @@ public class DriverFactory : IDriverFactory
     /// <summary>
     /// Add new setup from json to dictionary
     /// </summary>
+    /// <param name="setupId"></param>
     /// <param name="driverSetupAsDic">Driver options set as json dic</param>
-    public void AddSetup(IDictionary<string, object> driverSetupAsDic) =>
-        _setups.Add(driverSetupAsDic["Id"].ToString()!, FromDic(driverSetupAsDic));
+    public void AddSetup(string setupId, IDictionary<string, object> driverSetupAsDic) =>
+        _setups.Add(setupId, FromDic(driverSetupAsDic));
 
     /// <summary>
     /// Get driver instance from driver setup
@@ -143,5 +145,27 @@ public class DriverFactory : IDriverFactory
         var driver = setup.Create();
         setup.ApplyPostConstructionFeatures(driver);
         return driver;
+    }
+
+    /// <summary>
+    /// Disposes a driver from dic
+    /// </summary>
+    /// <param name="setupId"></param>
+    public void Dispose(string setupId)
+    {
+        _drivers[setupId].Quit();
+        _drivers.Remove(setupId);
+        //GC.SuppressFinalize(_drivers[setupId]);
+    }
+
+    /// <summary>
+    /// Disposes all created drivers
+    /// </summary>
+    public void Dispose()
+    {
+        foreach (var driverInstance in _drivers)
+            driverInstance.Value.Quit();
+
+        _drivers.Clear();
     }
 }

@@ -34,7 +34,11 @@ public class EdgeSetup : AbstractSetup<EdgeOptions>
     { }
 
     /// <inheritdoc/>
-    public override EdgeDriver Create() => string.IsNullOrEmpty(Builder.Options.AsDic()["driverPath"].ToString()) ?
-        new EdgeDriver(Builder.Options) :
-        new EdgeDriver(Builder.Options.AsDic()["driverPath"].ToString(), Builder.Options);
+    public override EdgeDriver Create()
+    {
+        if (Builder.Options.AsDic().ContainsKey("driverPath"))
+            return new EdgeDriver(Builder.Options.AsDic()["driverPath"].ToString(), Builder.Options);
+
+        return new EdgeDriver(Builder.Options);
+    }
 }
