@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.Logging;
 using Test4Net.Logging.Provider;
 
-namespace Test4Net.QACode.MSTest;
+namespace Test4Net.QACode.Testing.MSTest;
 
 [TestClass]
 public class MsTestAdapterTest : BaseTest

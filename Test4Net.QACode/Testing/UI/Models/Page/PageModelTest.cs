@@ -1,6 +1,4 @@
-﻿using Test4Net.QACode.Fakes;
-
-namespace Test4Net.QACode.UI.Models.Page;
+﻿namespace Test4Net.QACode.Testing.UI.Models.Page;
 
 [TestClass]
 

@@ -1,10 +1,10 @@
 ﻿using Microsoft.Extensions.Configuration;
+using Test4Net.QACode.Constants;
 using Test4Net.UI.POM.Page;
 using Test4Net.UI.POM.Page.Interfaces;
 using Test4Net.UITest.Models;
-using ExecutionContext = Test4Net.UITest.Models.ExecutionContext;
 
-namespace Test4Net.QACode.UI;
+namespace Test4Net.QACode.Testing.UI;
 
 [TestClass]
 public abstract class BaseUiTest : AbstractUiTest
@@ -21,13 +21,13 @@ public abstract class BaseUiTest : AbstractUiTest
     /// <summary>
     /// Init configuration from json settings
     /// </summary>
-    protected BaseUiTest() :base(
-        new ExecutionContext(Environment.GetEnvironmentVariable(
-                Conventions.EnvironmentVariableName.BrowserProfile.ToString(), EnvironmentVariableTarget.User),
-            DriverSettings))
+    protected BaseUiTest() 
     {
         Environment.SetEnvironmentVariable(Conventions.EnvironmentVariableName.BrowserProfile.ToString(), "Chrome");
         
+        InitFactories(Environment.GetEnvironmentVariable(
+            Conventions.EnvironmentVariableName.BrowserProfile.ToString()), DriverSettings);
+
         Configuration = new ConfigurationBuilder()
             .SetBasePath(SetupPath)
                 .AddEnvironmentVariables()

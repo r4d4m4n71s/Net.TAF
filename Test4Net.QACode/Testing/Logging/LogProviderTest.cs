@@ -4,7 +4,7 @@ using Test4Net.Logging.Adapter;
 using Test4Net.Logging.Interfaces;
 using Test4Net.Logging.Provider;
 
-namespace Test4Net.QACode.Logging;
+namespace Test4Net.QACode.Testing.Logging;
 
 [TestClass]
 public class LogProviderTest : BaseTest

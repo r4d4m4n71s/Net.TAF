@@ -40,9 +40,6 @@
 	<ItemGroup>
 		<None Include="..\Configuration\**" CopyToOutputDirectory="PreserveNewest" LinkBase="Configuration\" />
 		<None Include="..\Scripts\**" CopyToOutputDirectory="PreserveNewest" LinkBase="Scripts\" />
-	</ItemGroup>	
-	<ItemGroup>
-		<Folder Include="Xunit\" />
 	</ItemGroup>
 	
 	<ItemGroup>
@@ -57,6 +54,9 @@
 	
 	<ItemGroup>
 	  <AdditionalDesignTimeBuildInput Remove="FakesAssemblies\**" />
+	  <Compile Remove="Xunit\**" />
+	  <EmbeddedResource Remove="Xunit\**" />
+	  <None Remove="Xunit\**" />
 	</ItemGroup>
 	
 	

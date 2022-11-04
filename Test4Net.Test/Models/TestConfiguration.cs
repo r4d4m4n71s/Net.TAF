@@ -8,6 +8,12 @@ public class TestConfiguration : ITestConfiguration
     public TestConfiguration()
     { }
 
+    public TestConfiguration(IDictionary<string, object> values, string id)
+    {
+        Id = id;
+        Values = values;
+    }
+
     /// <summary>
     /// Constructor from json dic
     /// </summary>

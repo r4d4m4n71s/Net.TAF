@@ -6,7 +6,7 @@ namespace Test4Net.UITest.Models;
 /// <summary>
 /// Test execution context
 /// </summary>
-public class ExecutionContext : IExecutionContext<IUiTestConfiguration>
+public class ExecutionContext :  IExecutionContext<IUiTestConfiguration>
 {
     /// <summary>
     /// Test case configuration
@@ -16,10 +16,16 @@ public class ExecutionContext : IExecutionContext<IUiTestConfiguration>
     /// <summary>
     /// Constructor from json dic
     /// </summary>
-    /// <param name="configurationName"></param>
-    /// <param name="fromJsonDic"></param>
-    public ExecutionContext(string configurationName, string fromJsonDic)
-    {
-        Configuration = new UiTestConfiguration(fromJsonDic, configurationName);
-    }
+    /// <param name="configurationId">Unique configuration identifier</param>
+    /// <param name="fromJsonDic">Configuration dic in json format</param>
+    public ExecutionContext(string configurationId, string fromJsonDic) => 
+        Configuration = new UiTestConfiguration(fromJsonDic, configurationId);
+
+    /// <summary>
+    /// Constructor from dic
+    /// </summary>
+    /// <param name="configurationId">Unique configuration identifier</param>
+    /// <param name="values">Configuration values</param>
+    public ExecutionContext(string configurationId, IDictionary<string, object> values) =>
+        Configuration = new UiTestConfiguration(values, configurationId);
 }

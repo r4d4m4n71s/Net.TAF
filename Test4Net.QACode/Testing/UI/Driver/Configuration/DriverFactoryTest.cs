@@ -6,7 +6,7 @@ using Test4Net.UI.WebBrowser.Driver;
 using Test4Net.UI.WebBrowser.Driver.Configuration.Type.Flavors;
 using Test4Net.UI.WebBrowser.Util;
 
-namespace Test4Net.QACode.UI.Driver.Configuration;
+namespace Test4Net.QACode.Testing.UI.Driver.Configuration;
 
 [TestClass]
 public class DriverFactoryTest : BaseUiTest
@@ -15,7 +15,7 @@ public class DriverFactoryTest : BaseUiTest
     [TestCategory("integration")]
     public void CreateChromeLocal_FromConfiguration_Ok()
     {
-        var optionsDic = DriverSettings.CreateOptionsStructure("Chrome");
+        var optionsDic = DriverSettings.CreateOptionsStructureForANode("Chrome");
         new DriverFactory(optionsDic["Id"].ToString(), optionsDic).Get("Chrome").Dispose();
     }
     
@@ -52,7 +52,7 @@ public class DriverFactoryTest : BaseUiTest
     [TestCategory("integration")]
     public void CreateBrowserStackChrome_FromConfiguration_Ok()
     {
-        var optionsDic = DriverSettings.CreateOptionsStructure("BSWin11Chrome");
+        var optionsDic = DriverSettings.CreateOptionsStructureForANode("BSWin11Chrome");
         new DriverFactory(optionsDic["Id"].ToString(), optionsDic).Get<RemoteWebDriver>("BSWin11Chrome").Dispose();
     }
 
@@ -60,7 +60,7 @@ public class DriverFactoryTest : BaseUiTest
     [TestCategory("integration")]
     public void CreateBrowserStackEdge_FromConfiguration_Ok()
     {
-        var optionsDic = DriverSettings.CreateOptionsStructure("BSWin11Edge");
+        var optionsDic = DriverSettings.CreateOptionsStructureForANode("BSWin11Edge");
         new DriverFactory(optionsDic["Id"].ToString(), optionsDic).Get("BSWin11Edge").Dispose();
     }
 }

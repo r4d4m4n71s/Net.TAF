@@ -1,20 +1,16 @@
 {
   "Chrome": {
     "type": "Chrome",
-    "Viewport": "1920x1080",
-    "driverPath": ""
+    "Viewport": "1920x1080"
   },
   "Edge": {
-    "type": "Edge",
-    "driverPath": ""
+    "type": "Edge"
   },
   "FireFox": {
-    "type": "Firefox",
-    "driverPath": ""
+    "type": "Firefox"
   },
   "Safari": {
-    "type": "Safari",
-    "driverPath": ""
+    "type": "Safari"
   },
   "BSWin11Chrome": {
     "type": "BrowserStackChrome",

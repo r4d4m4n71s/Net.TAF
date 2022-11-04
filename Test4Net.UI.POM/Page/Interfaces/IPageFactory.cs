@@ -1,11 +1,9 @@
-﻿using Test4Net.UI.WebBrowser.Browser.Interfaces;
-
-namespace Test4Net.UI.POM.Page.Interfaces
+﻿namespace Test4Net.UI.POM.Page.Interfaces
 {
     /// <summary>
     /// Provide page objects
     /// </summary>
-    public interface IPageFactory
+    public interface IPageFactory : IDisposable
     {
         /// <summary>
         /// Get page instance

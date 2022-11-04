@@ -11,7 +11,17 @@ public class PageFactory : IPageFactory
     /// <summary>
     /// Browser
     /// </summary>
-    private readonly IWebBrowser _webBrowser;
+    private readonly IBrowserFactory _browserFactory;
+
+    /// <summary>
+    /// Browser setup id to browser requesting
+    /// </summary>
+    private readonly string _setupId;
+
+    /// <summary>
+    /// Web browser, single instance for all page calls
+    /// </summary>
+    private IWebBrowser _webBrowser;
 
     /// <summary>
     /// Define default page rules to apply across all page instances
@@ -21,20 +31,26 @@ public class PageFactory : IPageFactory
     /// <summary>
     /// Constructor
     /// </summary>
-    /// <param name="webBrowser">Browser to feed pages</param>
-    public PageFactory(IWebBrowser webBrowser) => 
-        _webBrowser = webBrowser;
+    /// <param name="browserFactory">Browser to feed pages</param>
+    /// <param name="setupId">Browser setup id to browser requesting</param>
+    public PageFactory(IBrowserFactory browserFactory, string setupId)
+    {
+        _browserFactory = browserFactory;
+        _setupId = setupId;
+    }
 
     /// <summary>
     /// Constructor
     /// </summary>
-    /// <param name="webBrowser">Browser to feed pages</param>
+    /// <param name="browserFactory">Browser factory to feed pages</param>
+    /// <param name="setupId">Browser setup id to browser requesting</param>
     /// <param name="defineDefaultPageRules">Default validation rules applied to all pages</param>
-    public PageFactory(IWebBrowser webBrowser, 
+    public PageFactory(IBrowserFactory browserFactory, string setupId,
         Func<IPage, bool> defineDefaultPageRules)
     {
-        _webBrowser = webBrowser;
+        _browserFactory = browserFactory;
         _defineDefaultPageRules = defineDefaultPageRules;
+        _setupId = setupId;
     }
 
     /// <summary>
@@ -44,6 +60,9 @@ public class PageFactory : IPageFactory
     /// <returns>Page instance</returns>
     public T GetPage<T>(params object[] args) where T : IPage
     {
+        // single browser instance for this page factory request
+        _webBrowser ??= _browserFactory.Get(_setupId);
+
         var page = (T)Activator.CreateInstance(typeof(T), _webBrowser);
         
         if (_defineDefaultPageRules != null)
@@ -51,4 +70,9 @@ public class PageFactory : IPageFactory
         
         return page;
     }
+
+    /// <summary>
+    /// Disposes the web browser instance
+    /// </summary>
+    public void Dispose() => _webBrowser?.Dispose();
 }

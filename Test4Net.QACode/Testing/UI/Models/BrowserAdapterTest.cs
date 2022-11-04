@@ -1,4 +1,4 @@
-﻿namespace Test4Net.QACode.UI.Models;
+﻿namespace Test4Net.QACode.Testing.UI.Models;
 
 [TestClass]
 

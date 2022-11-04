@@ -27,4 +27,9 @@ public class WebBrowser : IWebBrowser
         ConfigurationId = configurationId;
         JavaScript = new JavaScriptAdapter(this);
     }
+
+    /// <summary>
+    /// Disposes the driver
+    /// </summary>
+    public void Dispose() => Driver.Quit();
 }

@@ -1,7 +1,8 @@
 ﻿using Microsoft.Extensions.Configuration;
+using Test4Net.QACode.Constants;
 using Test4Net.Test.Models;
 
-namespace Test4Net.QACode;
+namespace Test4Net.QACode.Testing;
 
 [TestClass]
 public abstract class BaseTest : AbstractTest
@@ -19,7 +20,7 @@ public abstract class BaseTest : AbstractTest
     protected BaseTest()
     {
         Environment.SetEnvironmentVariable(Conventions.EnvironmentVariableName.AppEnv.ToString(), Conventions.Env.Qa.ToString());
-        
+
         Configuration = new ConfigurationBuilder()
             .SetBasePath(SetupPath)
             .AddEnvironmentVariables()

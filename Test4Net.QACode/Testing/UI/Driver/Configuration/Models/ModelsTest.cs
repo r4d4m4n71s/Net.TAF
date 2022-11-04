@@ -10,7 +10,7 @@ using Test4Net.UI.WebBrowser.Driver.Configuration.Models;
 using Test4Net.UI.WebBrowser.Util;
 using Test4Net.Util.Json;
 
-namespace Test4Net.QACode.UI.Driver.Configuration.Models;
+namespace Test4Net.QACode.Testing.UI.Driver.Configuration.Models;
 
 [TestClass]
 public class ModelsTest
@@ -75,7 +75,7 @@ public class ModelsTest
     public void CreateChromeOptionsFromBuilderDic_Ok()
     {
         var optionsAsDic = File.ReadAllText(Path.Combine(Directory.GetCurrentDirectory(),
-            "TestData/Drivers/GeneralSettingsExtructure.json")).CreateOptionsStructure("chrome_1");
+            "TestData/Drivers/GeneralSettingsExtructure.json")).CreateOptionsStructureForANode("chrome_1");
 
         var options = new ChromiumBuilder<ChromeOptions>(optionsAsDic).Build().Options;
         AssertDriverOptions(options);
@@ -125,7 +125,7 @@ public class ModelsTest
     public void CreateEdgeOptionsFromBuilderDic_Ok()
     {
         var optionsAsDic = File.ReadAllText(Path.Combine(Directory.GetCurrentDirectory(),
-            "TestData/Drivers/GeneralSettingsExtructure.json")).CreateOptionsStructure("edge_2");
+            "TestData/Drivers/GeneralSettingsExtructure.json")).CreateOptionsStructureForANode("edge_2");
 
         var extraOptions = new EdgeOptions
         {
@@ -182,7 +182,7 @@ public class ModelsTest
     public void CreateFirefoxOptionsFromBuilderDic_Ok()
     {
         var optionsAsDic = File.ReadAllText(Path.Combine(Directory.GetCurrentDirectory(),
-            "TestData/Drivers/GeneralSettingsExtructure.json")).CreateOptionsStructure("firefox_3");
+            "TestData/Drivers/GeneralSettingsExtructure.json")).CreateOptionsStructureForANode("firefox_3");
 
         var extraOptions = new FirefoxOptions
         {
@@ -201,7 +201,7 @@ public class ModelsTest
     public void CreateSafariOptionsFromBuilderDic_Ok()
     {
         var optionsAsDic = File.ReadAllText(Path.Combine(Directory.GetCurrentDirectory(),
-           "TestData/Drivers/GeneralSettingsExtructure.json")).CreateOptionsStructure("safari_4");
+           "TestData/Drivers/GeneralSettingsExtructure.json")).CreateOptionsStructureForANode("safari_4");
 
         var options = new SafariBuilder(optionsAsDic).Build().Options;
         AssertDriverOptions(options);
@@ -255,7 +255,7 @@ public class ModelsTest
     public void Create_BrowserStackOptionsModel_FromJson_Ok()
     {
         var optionsAsDic = File.ReadAllText(Path.Combine(Directory.GetCurrentDirectory(),
-           "TestData/Drivers/GeneralSettingsExtructure.json")).CreateOptionsStructure("bsWin11Chrome");
+           "TestData/Drivers/GeneralSettingsExtructure.json")).CreateOptionsStructureForANode("bsWin11Chrome");
 
         optionsAsDic.Should().NotBeNull();
         optionsAsDic.Should().NotBeEmpty();

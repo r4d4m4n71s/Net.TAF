@@ -1,4 +1,5 @@
 ﻿using System.Reflection;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using OpenQA.Selenium;
 using Test4Net.Util.Json;
@@ -38,8 +39,14 @@ public static class DriverOptionsExtensions
             _options.GetTypeSafeOptionName(s.Key).Equals(string.Empty)).ToList();
 
         foreach (var additionalOpKvp in userOptions)
-            _options.AddAdditionalOption(additionalOpKvp.Key, additionalOpKvp.Value.Key);
+        {
+            var optionValue = additionalOpKvp.Value.Key;
+            if (optionValue is JObject)
+                optionValue = ((JObject)optionValue).ToObject<IDictionary<string, object>>();
 
+            _options.AddAdditionalOption(additionalOpKvp.Key, optionValue);
+        }
+        
         return _options;
     }
 
@@ -48,9 +55,9 @@ public static class DriverOptionsExtensions
     /// Force to add options mapping keys-values to DriverOptions properties
     /// </summary>
     /// <returns>Options that were not able to set</returns>
-    public static IDictionary<string, KeyValuePair<string, string>> MapOptionsFromDic(this DriverOptions options, IDictionary<string, object> optionsAsDic)
+    public static IDictionary<string, KeyValuePair<object, string>> MapOptionsFromDic(this DriverOptions options, IDictionary<string, object> optionsAsDic)
     {
-        var rejectedOptions = new Dictionary<string, KeyValuePair<string, string>>();
+        var rejectedOptions = new Dictionary<string, KeyValuePair<object, string>>();
         foreach (var optionKvp in optionsAsDic)
         {
             try
@@ -59,7 +66,7 @@ public static class DriverOptionsExtensions
             }
             catch (Exception e)
             {
-                rejectedOptions.Add(optionKvp.Key, new KeyValuePair<string, string>(optionKvp.Value.ToString(), e.Message));
+                rejectedOptions.Add(optionKvp.Key, new KeyValuePair<object, string>(optionKvp.Value, e.Message));
             }
         }
         return rejectedOptions;

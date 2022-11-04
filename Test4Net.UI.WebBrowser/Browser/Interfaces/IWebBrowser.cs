@@ -5,7 +5,7 @@ namespace Test4Net.UI.WebBrowser.Browser.Interfaces;
 /// <summary>
 /// Html browser
 /// </summary>
-public interface IWebBrowser
+public interface IWebBrowser : IDisposable
 {
     /// <summary>
     /// Configuration id when the browser was created

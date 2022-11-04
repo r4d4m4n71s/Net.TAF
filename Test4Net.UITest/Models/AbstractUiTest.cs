@@ -3,8 +3,8 @@ using Test4Net.Test.Models;
 using Test4Net.UI.POM.Page;
 using Test4Net.UI.POM.Page.Interfaces;
 using Test4Net.UI.WebBrowser.Browser;
-using Test4Net.UI.WebBrowser.Browser.Interfaces;
 using Test4Net.UI.WebBrowser.Driver;
+using Test4Net.UI.WebBrowser.Util;
 using Test4Net.UITest.Interfaces;
 
 namespace Test4Net.UITest.Models;
@@ -16,31 +16,22 @@ public abstract class AbstractUiTest : AbstractTest, IDisposable
     /// <summary>
     /// Test context
     /// </summary>
-    protected new IExecutionContext<IUiTestConfiguration> ExecContext { get; }
+    protected new IExecutionContext<IUiTestConfiguration> ExecContext { get; set; }
 
     /// <inheritdoc cref="UI.POM.Page.PageFactory"/>
-    protected readonly IPageFactory PageFactory;
-
-    private readonly IBrowserFactory _browserFactory;
+    protected IPageFactory PageFactory;
 
     /// <summary>
-    /// Constructor
+    /// Initialize factories
     /// </summary>
-    /// <param name="pageFactory"></param>
-    public AbstractUiTest(IPageFactory pageFactory = null) => 
-        PageFactory = pageFactory;
-
-    /// <summary>
-    /// Constructor from test context <see cref="IExecutionContext{T}"/>>
-    /// </summary>
-    /// <param name="execContext"></param>
-    public AbstractUiTest(IExecutionContext<IUiTestConfiguration> execContext)
+    /// <param name="setupId">setup profile id to use</param>
+    /// <param name="driverSettings">json file with driver setups</param>
+    public virtual void InitFactories(string setupId, string driverSettings)
     {
-        ExecContext = execContext;
+        ExecContext = ExecutionContextFromSettings(setupId, driverSettings);
 
         var driverFactory = new DriverFactory(ExecContext.Configuration.Id, ExecContext.Configuration.Values);
-        _browserFactory = new BrowserFactory(driverFactory);
-        PageFactory = new PageFactory(_browserFactory.Get(ExecContext.Configuration.Id), DefineDefaultPageRules);
+        PageFactory = new PageFactory(new BrowserFactory(driverFactory), ExecContext.Configuration.Id, DefineDefaultPageRules);
     }
 
     /// <summary>
@@ -52,8 +43,15 @@ public abstract class AbstractUiTest : AbstractTest, IDisposable
     /// <summary>
     /// Dispose unhandled resources
     /// </summary>
-    public virtual void Dispose()
-    {
-        ((BrowserFactory)_browserFactory).Dispose();
-    }
+    public virtual void Dispose() => 
+        PageFactory.Dispose();
+
+    /// <summary>
+    /// Define execution context from settings file
+    /// </summary>
+    /// <param name="setupId"></param>
+    /// <param name="settings"></param>
+    /// <returns></returns>
+    public static IExecutionContext<IUiTestConfiguration> ExecutionContextFromSettings(string setupId, string settings) => 
+        new ExecutionContext(setupId, settings.CreateOptionsStructureForANode(setupId));
 }

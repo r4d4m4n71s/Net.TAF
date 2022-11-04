@@ -16,13 +16,14 @@ public static class DriverSetupExtensions
     /// </summary>
     /// <param name="driverSettingsAsJson"></param>
     /// <param name="driverId"></param>
+    /// <param name="commonsKey">Node with the common information</param>
     /// <returns>Options as dic</returns>
-    public static IDictionary<string, object> CreateOptionsStructure(this string driverSettingsAsJson, string driverId)
+    public static IDictionary<string, object> CreateOptionsStructureForANode(this string driverSettingsAsJson, string driverId, string commonsKey = "commons")
     {
         var driverSettingsAsDic = driverSettingsAsJson.ToDictionary();
 
-        var target = driverSettingsAsDic.ContainsKey("commons") ? 
-            driverSettingsAsDic["commons"].ToString().Merge(driverSettingsAsDic[driverId].ToString()).ToDictionary() : 
+        var target = driverSettingsAsDic.ContainsKey(commonsKey) ? 
+            driverSettingsAsDic[commonsKey].ToString().Merge(driverSettingsAsDic[driverId].ToString()).ToDictionary() : 
             driverSettingsAsDic[driverId].JsonToDic();
             
         target.Add("Id", driverId);
@@ -36,17 +37,18 @@ public static class DriverSetupExtensions
     /// setups
     /// </summary>
     /// <param name="driverSettingsAsJson"></param>
+    /// <param name="commonsKey">Node with the common information</param>
     /// <returns>Options as list of dic</returns>
-    public static List<IDictionary<string, object>> CreateOptionsStructure(this string driverSettingsAsJson)
+    public static List<IDictionary<string, object>> CreateOptionsStructure(this string driverSettingsAsJson, string commonsKey = "commons")
     {
         var setups = new List<IDictionary<string, object>>();
         var driverSettingsAsDic = driverSettingsAsJson.ToDictionary();
 
         var commons = string.Empty;
-        if (driverSettingsAsDic.ContainsKey("commons"))
+        if (driverSettingsAsDic.ContainsKey(commonsKey))
         {
-            commons = driverSettingsAsDic["commons"].ToString();
-            driverSettingsAsDic.Remove("commons");
+            commons = driverSettingsAsDic[commonsKey].ToString();
+            driverSettingsAsDic.Remove(commonsKey);
         }
 
         foreach (var setupAsDicKvp in driverSettingsAsDic)

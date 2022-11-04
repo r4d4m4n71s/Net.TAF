@@ -1,4 +1,4 @@
-﻿namespace Test4Net.QACode;
+﻿namespace Test4Net.QACode.Constants;
 
 internal static class Conventions
 {
