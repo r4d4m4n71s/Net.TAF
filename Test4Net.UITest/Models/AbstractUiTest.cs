@@ -1,47 +1,57 @@
 ﻿using Test4Net.Test.Interfaces;
 using Test4Net.Test.Models;
-using Test4Net.UI.Browser.Interfaces;
-using Test4Net.UI.Page;
-using Test4Net.UI.Page.Interfaces;
+using Test4Net.UI.POM.Page;
+using Test4Net.UI.POM.Page.Interfaces;
+using Test4Net.UI.WebBrowser.Browser;
+using Test4Net.UI.WebBrowser.Driver;
+using Test4Net.UI.WebBrowser.Util;
 using Test4Net.UITest.Interfaces;
 
 namespace Test4Net.UITest.Models;
 /// <summary>
 /// Define base ui model for instrument testing
 /// </summary>
-public abstract class AbstractUiTest : AbstractTest
+public abstract class AbstractUiTest : AbstractTest, IDisposable
 {
-    /// <inheritdoc cref="PageFactory"/>
-    private readonly IPageFactory _pageFactory = new PageFactory(LogProvider);
+    /// <summary>
+    /// Test context
+    /// </summary>
+    protected new IExecutionContext<IUiTestConfiguration> ExecContext { get; set; }
+
+    /// <inheritdoc cref="UI.POM.Page.PageFactory"/>
+    protected IPageFactory PageFactory;
 
     /// <summary>
-    /// Browser factory
+    /// Initialize factories
     /// </summary>
-    protected IBrowserFactory BrowserFactory { get; set; }
-
-    /// <inheritdoc cref="AbstractTest.Context"/>
-    protected new ITestContext<IUiTestConfiguration> Context { get; set; }
-
-    /// <summary>
-    /// Builds a page, validates and return it.
-    /// </summary>
-    /// <typeparam name="T"></typeparam>
-    /// <returns></returns>
-    protected T GetPage<T>() where T : AbstractPage
+    /// <param name="setupId">setup profile id to use</param>
+    /// <param name="driverSettings">json file with driver setups</param>
+    public virtual void InitFactories(string setupId, string driverSettings)
     {
-        var page = _pageFactory.GetPage<T>(BrowserFactory.Get(Context.Configuration.Name));
+        ExecContext = ExecutionContextFromSettings(setupId, driverSettings);
 
-        // Derive page rules validation to the concrete test class
-        if (ValidatePageRules(page))
-            return page;
-
-        return default;
+        var driverFactory = new DriverFactory(ExecContext.Configuration.Id, ExecContext.Configuration.Values);
+        PageFactory = new PageFactory(new BrowserFactory(driverFactory), ExecContext.Configuration.Id, DefineDefaultPageRules);
     }
 
     /// <summary>
-    /// Define validate rules <see cref="ValidatePageRules"/> for a page
+    /// Define default validation rules applied across all generated pages <see cref="ValidationRules"/>
     /// </summary>
-    /// <param name="page">target page to add rules</param>
-    /// <returns>true if rules validation is success</returns>
-    protected abstract bool ValidatePageRules(AbstractPage page);
+    /// <returns>true if rules validation must be pass success</returns>
+    protected virtual bool DefineDefaultPageRules(IPage page) => true;
+
+    /// <summary>
+    /// Dispose unhandled resources
+    /// </summary>
+    public virtual void Dispose() => 
+        PageFactory.Dispose();
+
+    /// <summary>
+    /// Define execution context from settings file
+    /// </summary>
+    /// <param name="setupId"></param>
+    /// <param name="settings"></param>
+    /// <returns></returns>
+    public static IExecutionContext<IUiTestConfiguration> ExecutionContextFromSettings(string setupId, string settings) => 
+        new ExecutionContext(setupId, settings.CreateOptionsStructureForANode(setupId));
 }

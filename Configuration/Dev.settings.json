@@ -1,0 +1,13 @@
+{
+  "BaseUrl": "http://localhost:8080/",
+  "LoginPath": "ui/#login",
+  "DashboardPath": "ui/#automationtraining/dashboard",
+  "UserName": "superadmin",
+  "UserPassword": "erebus",
+  //"BrowserProfiles": ["BSWin11Chrome","Chrome"],
+  "Logging": {
+    "LogLevel": {
+      "Default": "Information"
+    }
+  }
+}

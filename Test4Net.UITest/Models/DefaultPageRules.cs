@@ -1,6 +1,6 @@
-﻿using Test4Net.UI.Attributes;
-using Test4Net.UI.Browser.Interfaces;
-using Test4Net.UI.Page;
+﻿using Test4Net.UI.POM.Page;
+using Test4Net.UI.POM.Page.Interfaces.Attributes;
+using Test4Net.UI.WebBrowser.Browser.Interfaces;
 using Test4Net.UITest.Interfaces;
 
 namespace Test4Net.UITest.Models;
@@ -98,7 +98,7 @@ public static class DefaultPageRules
     /// <param name="testConfiguration"></param>
     /// <returns>true if negotiation is success</returns>
     /// <exception cref="InvalidOperationException">In case of critical faults</exception>
-    public static bool NegotiateDefaultRules(this List<Rule> faults, IUiTestConfiguration testConfiguration)
+    public static bool NegotiateDefaultRules(this IEnumerable<Rule> faults, IUiTestConfiguration testConfiguration)
     {
         // Any page that doesn't supports the testing platform must raise exception
         if (faults.Any(f => f.Owner.GetInterface(nameof(IPlatformSupportedAttribute)) != null))
@@ -108,7 +108,7 @@ public static class DefaultPageRules
         }
 
         // Any page that doesn't supports the testing browser must raise exception
-        if (faults.Any(f => f.Owner.GetInterface(nameof(IBrowser)) != null))
+        if (faults.Any(f => f.Owner.GetInterface(nameof(IWebBrowser)) != null))
         {
             var browser = testConfiguration.Browser;
             throw new InvalidOperationException($"There are rules that doesn't meets the {browser} browser criteria.");

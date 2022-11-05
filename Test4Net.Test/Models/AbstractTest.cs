@@ -12,14 +12,23 @@ namespace Test4Net.Test.Models;
 public abstract class AbstractTest
 {
     /// <summary>
-    /// Test context
-    /// </summary>
-    protected ITestContext<ITestConfiguration> Context { get; set; }
-
-    /// <summary>
     /// Log provider
     /// </summary>
-    protected static ILogProvider LogProvider = new LogProvider();
+    protected static ILogProvider LogProvider { get; set; }
+
+    /// <summary>
+    /// Test context
+    /// </summary>
+    protected IExecutionContext<ITestConfiguration> ExecContext { get; init; }
+
+    public AbstractTest(ILogProvider logProvider, IExecutionContext<ITestConfiguration> execContext)
+    {
+        LogProvider = logProvider;
+        ExecContext = execContext;
+    }
+    
+    public AbstractTest()
+    { }
 
     /// <summary>
     /// Log test messages 
@@ -37,5 +46,5 @@ public abstract class AbstractTest
     /// Configure log from configuration section
     /// </summary>
     protected ILogProvider ConfigureLogger(IConfigurationSection loggerConfigurationSection) =>
-        ConfigureLogger(builder => builder.Decorate(loggerConfigurationSection));
+        ConfigureLogger(builder => builder.Decorate(loggerConfigurationSection)); 
 }

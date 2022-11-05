@@ -6,9 +6,9 @@
 public interface ITestConfiguration
 {
     /// <summary>
-    /// Configuration name
+    /// Configuration unique id
     /// </summary>
-    string Name { get; set; }
+    string Id { get; set; }
 
     /// <summary>
     /// Configuration values

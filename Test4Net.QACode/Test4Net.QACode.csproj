@@ -9,11 +9,11 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<PackageReference Include="coverlet.collector" Version="3.1.2">
+		<PackageReference Include="coverlet.collector" Version="3.2.0">
 			<PrivateAssets>all</PrivateAssets>
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>
-		<PackageReference Include="coverlet.msbuild" Version="3.1.2">
+		<PackageReference Include="coverlet.msbuild" Version="3.2.0">
 			<PrivateAssets>all</PrivateAssets>
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>
@@ -26,23 +26,20 @@
 		<PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.3.2" />
 		<PackageReference Include="MSTest.TestAdapter" Version="2.2.10" />
 		<PackageReference Include="MSTest.TestFramework" Version="2.2.10" />
-		<PackageReference Include="Selenium.Firefox.WebDriver" Version="0.27.0" />
 		<PackageReference Include="Selenium.WebDriver.ChromeDriver" Version="107.0.5304.6200" />
+		<PackageReference Include="Selenium.WebDriver.GeckoDriver" Version="0.32.0" />
 		<PackageReference Include="Selenium.WebDriver.MSEdgeDriver" Version="106.0.1370.34" />
 	</ItemGroup>
 
 	<ItemGroup>
 		<ProjectReference Include="..\Test4Net.Logging\Test4Net.Logging.csproj" />
 		<ProjectReference Include="..\Test4Net.Test\Test4Net.Test.csproj" />
+		<ProjectReference Include="..\Test4Net.UI.POM\Test4Net.UI.POM.csproj" />
 		<ProjectReference Include="..\Test4Net.UITest\Test4Net.UITest.csproj" />
-		<ProjectReference Include="..\Test4Net.UI\Test4Net.UI.csproj" />
 	</ItemGroup>
 	<ItemGroup>
 		<None Include="..\Configuration\**" CopyToOutputDirectory="PreserveNewest" LinkBase="Configuration\" />
 		<None Include="..\Scripts\**" CopyToOutputDirectory="PreserveNewest" LinkBase="Scripts\" />
-	</ItemGroup>	
-	<ItemGroup>
-		<Folder Include="Xunit\" />
 	</ItemGroup>
 	
 	<ItemGroup>
@@ -57,6 +54,9 @@
 	
 	<ItemGroup>
 	  <AdditionalDesignTimeBuildInput Remove="FakesAssemblies\**" />
+	  <Compile Remove="Xunit\**" />
+	  <EmbeddedResource Remove="Xunit\**" />
+	  <None Remove="Xunit\**" />
 	</ItemGroup>
 	
 	

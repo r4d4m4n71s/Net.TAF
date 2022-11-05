@@ -1,25 +1,13 @@
 {
-  "BaseUrl": "",
-  "BrowserProfiles": [
-    "BSWin11Chrome",
-    "Chrome",
-    "AndroidGalaxyS20",
-    "IosIPhone12Pro"
-  ],
+  "BaseUrl": "https://rp.epam.com",
+  "UserName": "",
+  "UserPassword": "",
+  "LoginPath": "ui/#login",
+  "DashboardPath": "ui/#automationtraining/dashboard",
+  //"BrowserProfiles": ["BSWin11Chrome","Chrome"],
   "Logging": {
-    "LogLevel": { // All providers, LogLevel applies to all the enabled providers.
-      "Default": "Information" // Default logging, Error and higher.     
-    },
-    "Debug": { // Debug provider.
-      "LogLevel": {
-        "Default": "Information" // Overrides preceding LogLevel:Default setting.       
-      }
-    },
-    "Console": {
-      "IncludeScopes": true,
-      "LogLevel": {
-        "Default": "Information"
-      }
+    "LogLevel": {
+      "Default": "Information"
     }
   }
 }

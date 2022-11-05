@@ -36,10 +36,7 @@ public class LogProvider : ILogProvider
     /// <returns><see cref="ILog"/> instance</returns>
     public ILog GetLogger<T>()
     {
-        if (!LogInstances.ContainsKey(typeof(T)))
-            LogInstances.Add(typeof(T), new LogAdapter<T>(GetNativeLogger<T>()));
-
-        return (ILog)LogInstances[typeof(T)];
+        return new LogAdapter<T>(GetNativeLogger<T>());
     }
 
     /// <summary>
@@ -49,10 +46,7 @@ public class LogProvider : ILogProvider
     /// <returns><see cref="ILog"/> instance</returns>
     public ILog GetLogger(Type type)
     {
-        if (!LogInstances.ContainsKey(type))
-            LogInstances.Add(type, new LogAdapter(GetNativeLogger(type)));
-
-        return (ILog)LogInstances[type];
+        return new LogAdapter(GetNativeLogger(type));
     }
 
     /// <summary>

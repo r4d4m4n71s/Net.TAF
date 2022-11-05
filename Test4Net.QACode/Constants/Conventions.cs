@@ -1,0 +1,24 @@
+﻿namespace Test4Net.QACode.Constants;
+
+internal static class Conventions
+{
+    /// <summary>
+    /// Application environments
+    /// </summary>
+    public enum Env
+    {
+        Dev,
+        Qa,
+        PreProd,
+        Prod
+    }
+
+    /// <summary>
+    /// Define keys to global variables
+    /// </summary>
+    public enum EnvironmentVariableName
+    {
+        AppEnv,
+        BrowserProfile
+    }
+}

@@ -8,18 +8,24 @@ public class TestConfiguration : ITestConfiguration
     public TestConfiguration()
     { }
 
+    public TestConfiguration(IDictionary<string, object> values, string id)
+    {
+        Id = id;
+        Values = values;
+    }
+
     /// <summary>
     /// Constructor from json dic
     /// </summary>
     /// <param name="fromJsonDic"></param>
-    /// <param name="name">Configuration key to look up into dic</param>
-    public TestConfiguration(string fromJsonDic, string name)
+    /// <param name="id">Configuration key to look up into dic</param>
+    public TestConfiguration(string fromJsonDic, string id)
     {
-        Name = name;
-        Values = fromJsonDic.GetJsonNode($"$..{name}").ToDictionary();
+        Id = id;
+        Values = fromJsonDic.GetJsonNode($"$..{id}").ToDictionary();
     }
 
-    public string Name { get; set; }
+    public string Id { get; set; }
 
     public IDictionary<string, object> Values { get; set; }
 }

@@ -55,7 +55,7 @@ public static class JsonExtensions
     /// </summary>
     /// <param name="target">To</param>
     /// <param name="reference">From</param>
-    /// <param name="strategy">MergeArrayHandling, union by default</param>
+    /// <param name="strategy">MergeArrayHandling, union by default OrdinalIgnoreCase</param>
     /// <returns></returns>
     public static string Merge(this string target, string reference, MergeArrayHandling strategy = MergeArrayHandling.Replace)
     {
@@ -63,7 +63,8 @@ public static class JsonExtensions
         targetObj.Merge(JObject.Parse(reference), new JsonMergeSettings
         {
             // union array values together to avoid duplicates
-            MergeArrayHandling = strategy
+            MergeArrayHandling = strategy,
+            PropertyNameComparison = StringComparison.OrdinalIgnoreCase
         });
 
         return targetObj.ToString();
