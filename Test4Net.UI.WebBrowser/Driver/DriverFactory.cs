@@ -99,13 +99,8 @@ public class DriverFactory : IDriverFactory
     {
         var setups = new Dictionary<string, IDriverSetup>();
 
-        foreach (var dic in driverSettingsAsJson.CreateOptionsStructure())
-        {
-            
-        }
-
         // ForEach setup
-        .ForEach(
+        driverSettingsAsJson.CreateOptionsStructure().ForEach(
             setupAsDic =>
                 setups.Add(setupAsDic["Id"].ToString()!, FromDic(setupAsDic)));
 
