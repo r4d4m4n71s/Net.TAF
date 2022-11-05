@@ -1,20 +1,19 @@
 {
   "Chrome": {
-    "type": "Chrome",
+    "Type": "Chrome",
     "Viewport": "1920x1080"
   },
   "Edge": {
-    "type": "Edge"
+    "Type": "Edge"
   },
   "FireFox": {
-    "type": "Firefox"
+    "Type": "Firefox"
   },
   "Safari": {
-    "type": "Safari"
+    "Type": "Safari"
   },
   "BSWin11Chrome": {
-    "type": "BrowserStackChrome",
-    "Proxy": "",
+    "Type": "BrowserStackChrome",
     "bstack:options": {
       "os": "Windows",
       "osVersion": "11",
@@ -22,16 +21,14 @@
     }
   },
   "BSWin11Edge": {
-    "type": "BrowserStackEdge",
-    "Proxy": "",
+    "Type": "BrowserStackEdge",
     "bstack:options": {
       "os": "Windows",
-      "osVersion": "11",
-      "browserName": "xxxxx"
+      "osVersion": "11"      
     }
   },
   "FakeXX": {
-    "type": "BrowserStackEdge",
+    "Type": "BrowserStackEdge",
     "Options": {
       "FakeOpton": 123
     },
@@ -41,8 +38,8 @@
       "osVersion": "11"
     }
   },
-  "commons": {
-    "Arguments": [
+  "Commons": {
+    "Args": [
       "--start-maximized",
       "--incognito",
       "--disable-extensions",

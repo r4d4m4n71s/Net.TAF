@@ -63,7 +63,11 @@ public class PageFactory : IPageFactory
         // single browser instance for this page factory request
         _webBrowser ??= _browserFactory.Get(_setupId);
 
-        var page = (T)Activator.CreateInstance(typeof(T), _webBrowser);
+        var arguments = new List<object> { _webBrowser };
+        if (args != null)
+            arguments.AddRange(args);
+
+        var page = (T)Activator.CreateInstance(typeof(T), arguments.ToArray());
         
         if (_defineDefaultPageRules != null)
             return _defineDefaultPageRules(page) ? page : default;

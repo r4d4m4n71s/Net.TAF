@@ -88,24 +88,23 @@ public abstract class AbstractBuilder<T> : IOptionsBuilder<T> where T : DriverOp
     /// </summary>
     /// <param name="driver"></param>
     /// <param name="timeoutsKey"></param>
-    protected virtual void SetTimeouts(IWebDriver driver, string timeoutsKey = "timeouts")
+    protected virtual void SetTimeouts(IWebDriver driver, string timeoutsKey = "Timeouts")
     {
-        /*if (SetupAsDic.ContainsKey(timeoutsKey))
-        {
-            var timeoutsFromDic = SetupAsDic[timeoutsKey].ToDictionary();
-            var timeouts = driver.Manage().Timeouts();
-            timeouts.AsynchronousJavaScript = TimeSpan.FromMilliseconds(Convert.ToDouble(timeoutsFromDic["AsynchronousJavaScript"]));
-            timeouts.ImplicitWait = TimeSpan.FromMilliseconds(Convert.ToDouble(timeoutsFromDic["ImplicitWait"]));
-            timeouts.PageLoad = TimeSpan.FromMilliseconds(Convert.ToDouble(timeoutsFromDic["PageLoad"]));
-        }*/
-
         if (Options.AsDic().ContainsKey(timeoutsKey))
         {
             var timeoutsFromDic = Options.AsDic()[timeoutsKey].JsonToDic();
-            var timeouts = driver.Manage().Timeouts();
-            timeouts.AsynchronousJavaScript = TimeSpan.FromMilliseconds(Convert.ToDouble(timeoutsFromDic["AsynchronousJavaScript"]));
-            timeouts.ImplicitWait = TimeSpan.FromMilliseconds(Convert.ToDouble(timeoutsFromDic["ImplicitWait"]));
-            timeouts.PageLoad = TimeSpan.FromMilliseconds(Convert.ToDouble(timeoutsFromDic["PageLoad"]));
+            
+            if(timeoutsFromDic.ContainsKey("AsynchronousJavaScript"))
+                driver.Manage().Timeouts().AsynchronousJavaScript = 
+                    TimeSpan.FromMilliseconds(Convert.ToDouble(timeoutsFromDic["AsynchronousJavaScript"]));
+            
+            if(timeoutsFromDic.ContainsKey("ImplicitWait"))
+                driver.Manage().Timeouts().ImplicitWait = 
+                    TimeSpan.FromMilliseconds(Convert.ToDouble(timeoutsFromDic["ImplicitWait"]));
+            
+            if (timeoutsFromDic.ContainsKey("PageLoad"))
+                driver.Manage().Timeouts().PageLoad = 
+                    TimeSpan.FromMilliseconds(Convert.ToDouble(timeoutsFromDic["PageLoad"]));
         }
     }
 
@@ -115,18 +114,8 @@ public abstract class AbstractBuilder<T> : IOptionsBuilder<T> where T : DriverOp
     /// </summary>
     /// <param name="driver"></param>
     /// <param name="viewPortKey"></param>
-    protected virtual void SetViewPort(IWebDriver driver, string viewPortKey = "viewPort")
+    protected virtual void SetViewPort(IWebDriver driver, string viewPortKey = "ViewPort")
     {
-        /*if (!SetupAsDic.ContainsKey(viewPortKey))
-        {
-            var viewPortFromDic = SetupAsDic[viewPortKey].ToString();
-
-            // Separate numeric values including decimals from string
-            var pat = @"(?=.*?).*?(\d+\.?\d*)";
-            var matches = new Regex(pat, RegexOptions.IgnoreCase).Matches(viewPortFromDic!);
-            driver.Manage().Window.Size = new Size(Convert.ToInt32(matches[0].Value), Convert.ToInt32(matches[0].Value));
-        }*/
-
         if (Options.AsDic().ContainsKey(viewPortKey))
         {
             var viewPort = Options.AsDic()[viewPortKey].ToString();

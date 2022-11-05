@@ -1,5 +1,4 @@
 ﻿using System.Reflection;
-using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using OpenQA.Selenium;
 using Test4Net.Util.Json;
@@ -110,10 +109,13 @@ public static class DriverOptionsExtensions
     /// <returns></returns>
     public static string GetTypeSafeOptionName(this DriverOptions options, string optionName) 
     {
+        // To lower case first character to meet property naming convention look up
+        var key = string.Concat(optionName.First().ToString().ToLower(), optionName.AsSpan(1));
+
         // Retrieve option type and safe name from driver options
         var method = options.GetType().GetMethod("GetTypeSafeOptionName",
             BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Static);
-        return method!.Invoke(options, new object[] { optionName })!.ToString();
+        return method!.Invoke(options, new object[] { key })!.ToString();
     }
 
     /// <summary>

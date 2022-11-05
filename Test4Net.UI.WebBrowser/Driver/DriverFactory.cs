@@ -99,8 +99,13 @@ public class DriverFactory : IDriverFactory
     {
         var setups = new Dictionary<string, IDriverSetup>();
 
+        foreach (var dic in driverSettingsAsJson.CreateOptionsStructure())
+        {
+            
+        }
+
         // ForEach setup
-        driverSettingsAsJson.CreateOptionsStructure().ForEach(
+        .ForEach(
             setupAsDic =>
                 setups.Add(setupAsDic["Id"].ToString()!, FromDic(setupAsDic)));
 
@@ -117,7 +122,7 @@ public class DriverFactory : IDriverFactory
         // Instance setup and store in setups dic
         var assemblyName = Assembly.GetExecutingAssembly().GetName().Name;
         return (IDriverSetup)Activator.CreateInstance(
-            Type.GetType($"{assemblyName}.Driver.Configuration.Type.Flavors.{setupAsDic["type"]}Setup, {assemblyName}", true),
+            Type.GetType($"{assemblyName}.Driver.Configuration.Type.Flavors.{setupAsDic["Type"]}Setup, {assemblyName}", true),
             args: setupAsDic)!;
     }
 

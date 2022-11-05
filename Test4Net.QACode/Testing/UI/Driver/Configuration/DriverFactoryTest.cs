@@ -12,7 +12,7 @@ namespace Test4Net.QACode.Testing.UI.Driver.Configuration;
 public class DriverFactoryTest : BaseUiTest
 {
     [TestMethod]
-    [TestCategory("integration")]
+    [TestCategory("LocalDrivers")]
     public void CreateChromeLocal_FromConfiguration_Ok()
     {
         var optionsDic = DriverSettings.CreateOptionsStructureForANode("Chrome");
@@ -20,12 +20,31 @@ public class DriverFactoryTest : BaseUiTest
     }
     
     [TestMethod]
-    [TestCategory("integration")]
+    [TestCategory("LocalDrivers")]
     public void CreateEdgeLocal_FromConfiguration_Ok() =>
         new DriverFactory(DriverSettings).Get<EdgeDriver>("Edge").Dispose();
 
     [TestMethod]
     [TestCategory("integration")]
+    public void CreateBrowserStackFireFox_Ok()
+    {
+        var options = new FirefoxOptions();
+        options.AddAdditionalOption("bstack:options", new Dictionary<string, object>
+        {
+            { "os", "Windows" },
+            {"osVersion", "11"},
+            {"userName", "johnfranco_xcUFk8"},
+            {"accessKey", "cc6mavEwvsW16mFEPNze"}
+        });
+
+        var setup = new BrowserStackFirefoxSetup(options);
+        var instance = new DriverFactory("BSWin11Firefox", setup).Get("BSWin11Firefox");
+        instance.Dispose();
+    }
+
+
+    [TestMethod]
+    [TestCategory("LocalDrivers")]
     public void CreateFireFoxLocal_FromConfiguration_Ok() =>
         new DriverFactory(DriverSettings).Get<FirefoxDriver>("FireFox").Dispose();
     

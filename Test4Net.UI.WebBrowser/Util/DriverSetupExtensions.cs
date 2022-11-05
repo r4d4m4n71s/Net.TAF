@@ -18,12 +18,20 @@ public static class DriverSetupExtensions
     /// <param name="driverId"></param>
     /// <param name="commonsKey">Node with the common information</param>
     /// <returns>Options as dic</returns>
-    public static IDictionary<string, object> CreateOptionsStructureForANode(this string driverSettingsAsJson, string driverId, string commonsKey = "commons")
+    public static IDictionary<string, object> CreateOptionsStructureForANode(this string driverSettingsAsJson, string driverId, string commonsKey = "Commons")
     {
         var driverSettingsAsDic = driverSettingsAsJson.ToDictionary();
 
-        var target = driverSettingsAsDic.ContainsKey(commonsKey) ? 
-            driverSettingsAsDic[commonsKey].ToString().Merge(driverSettingsAsDic[driverId].ToString()).ToDictionary() : 
+        bool hasCommons;
+        if (!(hasCommons = driverSettingsAsDic.ContainsKey(commonsKey)))
+        {
+            // Validate with the first character to lower case
+            commonsKey = string.Concat(commonsKey.First().ToString().ToLower(), commonsKey.AsSpan(1));
+            hasCommons = driverSettingsAsDic.ContainsKey(commonsKey);
+        }
+
+        var target = hasCommons ? driverSettingsAsDic[commonsKey].ToString().
+                Merge(driverSettingsAsDic[driverId].ToString()).ToDictionary() : 
             driverSettingsAsDic[driverId].JsonToDic();
             
         target.Add("Id", driverId);
@@ -39,13 +47,21 @@ public static class DriverSetupExtensions
     /// <param name="driverSettingsAsJson"></param>
     /// <param name="commonsKey">Node with the common information</param>
     /// <returns>Options as list of dic</returns>
-    public static List<IDictionary<string, object>> CreateOptionsStructure(this string driverSettingsAsJson, string commonsKey = "commons")
+    public static List<IDictionary<string, object>> CreateOptionsStructure(this string driverSettingsAsJson, string commonsKey = "Commons")
     {
         var setups = new List<IDictionary<string, object>>();
         var driverSettingsAsDic = driverSettingsAsJson.ToDictionary();
 
+        bool hasCommons;
+        if (!(hasCommons = driverSettingsAsDic.ContainsKey(commonsKey)))
+        {
+            // Validate with the first character to lower case
+            commonsKey = string.Concat(commonsKey.First().ToString().ToLower(), commonsKey.AsSpan(1));
+            hasCommons = driverSettingsAsDic.ContainsKey(commonsKey);
+        }
+
         var commons = string.Empty;
-        if (driverSettingsAsDic.ContainsKey(commonsKey))
+        if (hasCommons)
         {
             commons = driverSettingsAsDic[commonsKey].ToString();
             driverSettingsAsDic.Remove(commonsKey);
